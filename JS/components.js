@@ -24,7 +24,7 @@ function loadCSS(cssPath) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    loadComponent('../Components/header.html', 'header', '../css/styles.css');
-    loadComponent('../Components/footer.html', 'footer', '../css/styles.css');
+    loadComponent('../Components/header.html', 'header', '../css/Home.css');
+    loadComponent('../Components/footer.html', 'footer', '../css/Home.css');
     // loadComponent('../Components/sidebar.html', 'sidebar', '../css/styles.css');
 });
