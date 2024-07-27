@@ -1,3 +1,4 @@
+//Home page 
 function loadComponent(componentPath, elementId, cssPath) {
     fetch(componentPath)
         .then(response => {
@@ -25,5 +26,5 @@ function loadCSS(cssPath) {
 document.addEventListener('DOMContentLoaded', function() {
     loadComponent('../Components/header.html', 'header', '../css/styles.css');
     loadComponent('../Components/footer.html', 'footer', '../css/styles.css');
-    loadComponent('../Components/sidebar.html', 'sidebar', '../css/styles.css');
+    // loadComponent('../Components/sidebar.html', 'sidebar', '../css/styles.css');
 });
