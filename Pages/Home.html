@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/CSS/Home.css" />
+    <link rel="stylesheet" href="../CSS/menu.css">
     <title>The Gallery Café</title>
   </head>
   <body>
@@ -12,19 +13,66 @@
 
       <section id="home" class="hero">
        
-        <div class="hero-content">
-          <h1>Welcome to The Gallery Café</h1>
-          <h2>Discover Our Delicious Menu</h2>
-          <p>
-            Experience the best dining in Colombo with our diverse cuisine
-            options.
-          </p>
-          <a href="../Pages/Menu.html" class="btn">Explore Our Menu</a>
-        </div>
+       
+      </section>
+      <div class="hero-content">
+        <h1>Welcome to The Gallery Café</h1>
+        <h2>Discover Our Delicious Menu</h2>
+        <p>
+          Experience the best dining in Colombo with our diverse cuisine
+          options.
+        </p>
+        <a href="../Pages/Menu.html" class="btn">Explore Our Menu</a>
+      </div>
+
+      <section>
+        <h1>Special food and beverages</h1>
+        <div class="menu-grid" id="menuGrid">
+          <!-- Special food and beverages items will be inserted here dynamically -->
+      </div>
       </section>
 
     <div id="footer"></div>
 
     <script src="/JS/components.js"></script>
+    <script>
+      // Sample menu items data
+      const menuItems = [
+          { id: 1, name: 'Sri Lankan Curry', description: 'A delicious blend of spices and herbs.', price: '$10', image: '../menu Images/Sri_Lankan_Rice_and_Curry.jpg' },
+          { id: 2, name: 'Chinese Noodles', description: 'Stir-fried noodles with vegetables and meat.', price: '$12', image: '../menu Images/Chinese Noodles.avif' },
+          { id: 3, name: 'Italian Pizza', description: 'Classic margherita pizza with fresh ingredients.', price: '$15', image: '../menu Images/Italian Pizza.webp' },
+          // { id: 4, name: 'Sri Lankan Curry', description: 'A delicious blend of spices and herbs.', price: '$10', image: '../menu Images/Sri_Lankan_Rice_and_Curry.jpg' },
+          // { id: 5, name: 'Chinese Noodles', description: 'Stir-fried noodles with vegetables and meat.', price: '$12', image: '../menu Images/Chinese Noodles.avif' },
+          // { id: 6, name: 'Italian Pizza', description: 'Classic margherita pizza with fresh ingredients.', price: '$15', image: '../menu Images/Italian Pizza.webp' },
+          // Add more menu items as needed
+      ];
+
+      // Function to display menu items
+      function displayMenuItems(items) {
+          const menuGrid = document.getElementById('menuGrid');
+          menuGrid.innerHTML = ''; // Clear the grid
+          items.forEach(item => {
+              const menuItem = document.createElement('div');
+              menuItem.className = 'menu-item';
+              menuItem.innerHTML = `
+                  <img src="${item.image}" alt="${item.name}">
+                  <h3>${item.name}</h3>
+                  <p>${item.description}</p>
+                  <p class="price">${item.price}</p>
+              `;
+              menuGrid.appendChild(menuItem);
+          });
+      }
+
+      // Initial display of all menu items
+      displayMenuItems(menuItems);
+
+      // Search functionality
+      document.getElementById('searchBar').addEventListener('input', function(event) {
+          const searchText = event.target.value.toLowerCase();
+          const filteredItems = menuItems.filter(item => item.name.toLowerCase().includes(searchText));
+          displayMenuItems(filteredItems);
+      });
+  </script>
   </body>
 </html>
