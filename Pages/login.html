@@ -1,39 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/styles.css">
-    <link rel="stylesheet" href="../CSS/login.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="../CSS/styles.css"> -->
+    <link rel="stylesheet" href="../CSS/login.css" />
     <title>Login/Register - The Gallery Café</title>
-</head>
-<body>
-    
+  </head>
+  <body>
     <main>
-        <section class="auth-section">
-            
-            <div class="form-container">
-                <div class="login-form">
-                    <h3>Login</h3>
-                    <form id="loginForm" action="../Backend/login.php" method="POST">
-                        <div class="form-group">
-                            <label for="loginEmail">Email:</label>
-                            <input type="email" id="loginEmail" name="loginEmail" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="loginPassword">Password:</label>
-                            <input type="password" id="loginPassword" name="loginPassword" required>
-                        </div>
-                        <button type="submit">Login</button>
-                    </form>
-                    <p>Don't have an account? <a href="Register.html">Register here</a></p>
-                </div>
-                
+      <section class="auth-section">
+        <div class="form-container">
+          <div class="login-form">
+            <div class="image">
+              <img
+                src="../The Gallery Café Images/Logo.png"
+                alt="logo"
+                width="180px"
+                height="170px"
+              />
             </div>
-        </section>
+            <form id="loginForm" action="../Backend/login.php" method="POST">
+              <div class="form-group">
+                <label for="loginEmail">Email:</label>
+                  <input
+                    type="email"
+                    id="loginEmail"
+                    name="loginEmail"
+                    required
+                  />
+                </div>
+              <div class="form-group">
+                <label for="loginPassword">Password:</label>
+                <input
+                  type="password"
+                  id="loginPassword"
+                  name="loginPassword"
+                  required
+                />
+              </div>
+              <button type="submit">Login</button>
+            </form>
+            <p>
+              Don't have an account? <a href="Register.html">Register here</a>
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
-    
+
     <script src="../JS/components.js"></script>
     <script src="../JS/scripts.js"></script>
-</body>
+  </body>
 </html>

@@ -1,11 +1,18 @@
 <?php
+session_start();
 require_once 'db.php';
+
+// Check if the user is an admin
+if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
+    header("Location: ../Pages/login.html");
+    exit();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $role = 1; // User role
+    $role = $_POST['role'];
 
     // Validate that passwords match
     if ($_POST['password'] != $_POST['confirm_password']) {
@@ -17,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssi", $name, $email, $password, $role);
 
     if ($stmt->execute()) {
-        header("Location: ../Pages/login.html");
+        header("Location: ../Pages/admin.php");
     } else {
         echo "Error: " . $stmt->error;
     }
