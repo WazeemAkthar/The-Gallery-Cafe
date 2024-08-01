@@ -1,15 +1,24 @@
+<?php
+session_start();
+if (!isset($_SESSION['role_id'])) {
+    header("Location: login.html");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/CSS/Home.css" />
+    <link rel="stylesheet" href="../CSS/Home.css" />
     <link rel="stylesheet" href="../CSS/menu.css" />
     <title>The Gallery Café</title>
   </head>
   <body>
     <div id="header"></div>
-
+    <h1>Welcome, <?php echo $_SESSION['name']; ?></h1>
+    
     <section id="home" class="hero"></section>
     <div class="hero-content">
       <h1>Welcome to The Gallery Café</h1>

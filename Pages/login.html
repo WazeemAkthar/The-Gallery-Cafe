@@ -11,12 +11,11 @@
     
     <main>
         <section class="auth-section">
-            <h2>Login/Register</h2>
             
             <div class="form-container">
                 <div class="login-form">
                     <h3>Login</h3>
-                    <form id="loginForm">
+                    <form id="loginForm" action="../Backend/login.php" method="POST">
                         <div class="form-group">
                             <label for="loginEmail">Email:</label>
                             <input type="email" id="loginEmail" name="loginEmail" required>
@@ -27,35 +26,12 @@
                         </div>
                         <button type="submit">Login</button>
                     </form>
-                    <link>Don't have an account? <link/></div>
+                    <p>Don't have an account? <a href="Register.html">Register here</a></p>
                 </div>
                 
-                <div class="register-form">
-                    <h3>Register</h3>
-                    <form id="registerForm">
-                        <div class="form-group">
-                            <label for="registerName">Name:</label>
-                            <input type="text" id="registerName" name="registerName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="registerEmail">Email:</label>
-                            <input type="email" id="registerEmail" name="registerEmail" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="registerPassword">Password:</label>
-                            <input type="password" id="registerPassword" name="registerPassword" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="registerConfirmPassword">Confirm Password:</label>
-                            <input type="password" id="registerConfirmPassword" name="registerConfirmPassword" required>
-                        </div>
-                        <button type="submit">Register</button>
-                    </form>
-                </div>
             </div>
         </section>
     </main>
-    
     
     <script src="../JS/components.js"></script>
     <script src="../JS/scripts.js"></script>

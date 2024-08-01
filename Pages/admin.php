@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
+    header("Location: login.html");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +17,7 @@
 </head>
 <body>
     <div id="header"></div> <!-- Placeholder for header -->
-    
+    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
     <main>
         <h2>Admin Dashboard</h2>
         
