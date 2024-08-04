@@ -34,3 +34,10 @@ CREATE TABLE menu (
     item_image VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+--create Food culture--
+CREATE TABLE food_culture (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    culture_name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
