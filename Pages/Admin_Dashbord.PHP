@@ -189,7 +189,7 @@ $sql = "SELECT id, item_name, item_description, item_price, item_cultures, item_
     <!-- Add New Meal Type -->
     <div id="form2" class="form-container">
       <h3>Add New Meal Type</h3>
-      <form action="" method="post" enctype="multipart/form-data">
+      <form action="../Backend/add_meal_type.php" method="post" enctype="multipart/form-data">
         <div class="form-group">
           <label for="item-name">Meal Type:</label>
           <input type="text" id="item-name" name="item-name" required />
