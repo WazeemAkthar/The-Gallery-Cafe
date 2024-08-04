@@ -49,6 +49,9 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                             <th>Item</th>
                             <th>Description</th>
                             <th>Price</th>
+                            <th>Food Religion</th>
+                            <th>Food Type</th>
+                            <th>Image</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

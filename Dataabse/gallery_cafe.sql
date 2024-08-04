@@ -9,7 +9,6 @@ CREATE TABLE roles (
 );
 
 --users--
-
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -19,7 +18,19 @@ CREATE TABLE users (
     FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
--- Insert roles
+-- Insert roles--
 INSERT INTO roles (role_name) VALUES ('user'), ('staff'), ('admin');
---Primary Admin
+--Primary Admin--
 INSERT INTO users (name, email, password, role_id) VALUES ('Sahee', 'Sahee@gmail.com', PASSWORD('1234'), 3);
+
+--create add manu items table--
+CREATE TABLE menu (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    item_name VARCHAR(100) NOT NULL,
+    item_description TEXT NOT NULL,
+    item_price DECIMAL(10, 2) NOT NULL,
+    item_cultures VARCHAR(50) NOT NULL,
+    item_type VARCHAR(50) NOT NULL,
+    item_image VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
