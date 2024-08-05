@@ -3,191 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meal Management</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f8f8;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .button-container {
-            margin: 20px;
-        }
-
-        button {
-            background-color: #5bc0de;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #31b0d5;
-        }
-
-        .form-container {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            padding: 20px;
-            text-align: left;
-            z-index: 1001;
-        }
-
-        .form-container.active {
-            display: block;
-        }
-
-        .form-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-        }
-
-        .form-overlay.active {
-            display: block;
-        }
-
-        h3 {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"], select {
-            width: calc(100% - 20px);
-            padding: 8px 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        button[type="submit"] {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #d9534f;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #c9302c;
-        }
-    </style>
+    <title>Menu Items</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="button-container">
-        <button onclick="showForm('createMealTypeForm')">Create Meal Type</button>
-        <button onclick="showForm('addMealForm')">Add Meal</button>
+    <div class="table-container">
+        <h2>Food And Drinks</h2>
+        <table id="menu-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Item Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Food Culture</th>
+                    <th>Meal Type</th>
+                    <th>Image</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
 
-    <div id="createMealTypeForm" class="form-container">
-        <h3>Create Meal Type</h3>
-        <form id="mealTypeForm">
-            <div class="form-group">
-                <label for="meal-type">Meal Type:</label>
-                <input type="text" id="meal-type" name="meal_type" required />
-            </div>
-            <button type="submit">Submit Meal Type</button>
-        </form>
-    </div>
-
-    <div id="addMealForm" class="form-container">
-        <h3>Add Meal</h3>
-        <form id="addMealForm">
-            <div class="form-group">
-                <label for="meal-name">Meal Name:</label>
-                <input type="text" id="meal-name" name="meal_name" required />
-            </div>
-            <div class="form-group">
-                <label for="meal-type-select">Meal Type:</label>
-                <select id="meal-type-select" name="meal_type_select" required>
-                    <option value="">Select Meal Type</option>
-                </select>
-            </div>
-            <button type="submit">Add Meal</button>
-        </form>
-    </div>
-
-    <div id="formOverlay" class="form-overlay"></div>
-
-    <script>
-        let mealTypes = [];
-
-        function showForm(formId) {
-            document.getElementById('createMealTypeForm').classList.remove('active');
-            document.getElementById('addMealForm').classList.remove('active');
-            document.getElementById('formOverlay').classList.remove('active');
-            if (formId) {
-                document.getElementById(formId).classList.add('active');
-                document.getElementById('formOverlay').classList.add('active');
-            }
-        }
-
-        document.getElementById('mealTypeForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const mealType = document.getElementById('meal-type').value;
-            if (mealType) {
-                mealTypes.push(mealType);
-                updateMealTypeSelect();
-                document.getElementById('meal-type').value = '';
-                alert('Meal Type added successfully!');
-                showForm(null);
-            }
-        });
-
-        function updateMealTypeSelect() {
-            const mealTypeSelect = document.getElementById('meal-type-select');
-            mealTypeSelect.innerHTML = '<option value="">Select Meal Type</option>';
-            mealTypes.forEach(type => {
-                const option = document.createElement('option');
-                option.value = type;
-                option.text = type;
-                mealTypeSelect.add(option);
-            });
-        }
-
-        showForm(null);
-
-        document.getElementById('formOverlay').addEventListener('click', function() {
-            showForm(null);
-        });
-    </script>
+    <script src="../JS/scripts.js"></script>
 </body>
 </html>

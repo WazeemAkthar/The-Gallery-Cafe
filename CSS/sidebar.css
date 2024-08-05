@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #e0e5ec;
+  display: flex;
+}
+.sidebar {
+  width: 250px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  height: 95vh;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 30px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #666666;
+  transition: background-color 0.3s ease;
+}
+
+.nav-item.active,
+.nav-item:hover {
+  background-color: #f0f0f0;
+  color: #333333;
+}
+
+.nav-item i {
+  margin-right: 10px;
+}
+
+.notification-badge {
+  background-color: #ff0000;
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 2px 8px;
+  margin-left: auto;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-name {
+  font-weight: bold;
+}
+
+.profile-email {
+  color: #999999;
+  font-size: 14px;
+}

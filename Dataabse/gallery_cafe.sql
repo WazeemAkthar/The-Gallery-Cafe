@@ -41,3 +41,10 @@ CREATE TABLE food_culture (
     culture_name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+--create new meal type --
+CREATE TABLE meal_type (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    meal_type VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

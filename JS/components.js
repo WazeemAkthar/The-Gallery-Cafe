@@ -26,5 +26,6 @@ function loadCSS(cssPath) {
 document.addEventListener('DOMContentLoaded', function() {
     loadComponent('../Components/header.html', 'header', '../css/Home.css');
     loadComponent('../Components/footer.html', 'footer', '../css/Home.css');
-    // loadComponent('../Components/sidebar.html', 'sidebar', '../css/styles.css');
+    loadComponent('../Components/sidebar.html', 'sidebar', '../css/sidebar.css');
+    loadComponent('../Components/MenuIitems.php', 'menuIitems', '../css/MenuIitems.css');
 });
