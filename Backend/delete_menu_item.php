@@ -30,6 +30,6 @@ if ($conn->query($sql) === TRUE) {
 }
 
 $conn->close();
-header("Location: ../Pages/Admin_Dashbord.PHP"); // Redirect back to the table page
+header("Location: ../Pages/ManageMenu.php"); // Redirect back to the table page
 exit();
 ?>

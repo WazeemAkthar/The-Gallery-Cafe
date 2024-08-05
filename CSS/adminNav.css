@@ -1,0 +1,28 @@
+.button-container {
+  display: flex;
+  width: 100%;
+}
+
+/* Button styling */
+.button-container button {
+  flex: 1;
+  padding: 10px 20px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.button-container button:hover {
+  background-color: #45a049;
+}
+
+/* Active (clicked) effect for buttons */
+.button-container button:active,
+.button-container button.active {
+  background-color: #3e8e41;
+  border-radius: 0;
+}

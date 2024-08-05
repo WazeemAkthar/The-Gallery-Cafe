@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("s", $meal_type);
 
     if ($stmt->execute()) {
-        echo "New food culture added successfully!";
+        echo "New meal type added successfully!";
     } else {
         echo "Error: " . $stmt->error;
     }

@@ -438,22 +438,16 @@ $result = $conn->query($sql);
     document.getElementById('formOverlay').addEventListener('click', function () {
       showForm(null);
     });
-    // function showForm(formId) {
-    //   var forms = document.getElementsByClassName("form-container");
-    //   for (var i = 0; i < forms.length; i++) {
-    //     forms[i].style.display = "none";
-    //   }
-    //   document.getElementById(formId).style.display = "block";
-    // }
+
     function editItem(id) {
       // Redirect to an edit page with the item ID
-      window.location.href = '../Backend/edit_menu_item.php?id=' + id;
+      window.location.href = '.../Backend/edit_menu_item.php?id=' + id;
     }
 
     function deleteItem(id) {
       if (confirm('Are you sure you want to delete this item?')) {
         // Send a request to delete the item
-        window.location.href = '../Backend/delete_menu_item.php?id=' + id;
+        window.location.href = '.../Backend/delete_menu_item.php?id=' + id;
       }
     }
   </script>
