@@ -76,8 +76,6 @@ if ($meal_type_result->num_rows > 0) {
     <div id="adminNav"></div>
     <!----------------------------------------------- Manage Menu Foods and Drinks ----------------------------------------------->
     <div id="dashboard2">
-
-
         <!-- Add a New Food culture -->
         <div id="form1" class="form-container">
             <h3>Add a New Food culture</h3>

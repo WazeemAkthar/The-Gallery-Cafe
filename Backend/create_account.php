@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssi", $name, $email, $password, $role);
 
     if ($stmt->execute()) {
-        header("Location: ../Pages/admin.php");
+        header("Location: ../Pages/MangeAccount.php");
     } else {
         echo "Error: " . $stmt->error;
     }
