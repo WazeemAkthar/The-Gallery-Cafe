@@ -64,7 +64,7 @@ if ($meal_type_result->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Manage Menu</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="../CSS/Admin_Dashboard.css">
@@ -165,7 +165,12 @@ if ($meal_type_result->num_rows > 0) {
 
                 <div class="title1">
                     <h2>Food Cultures</h2>
-                    <button onclick="showForm('form1')">+ Add a New Food culture</button>
+
+                    <button class="button-add" onclick="showForm('form1')">
+                        <i class="material-icons">add</i>
+                        Add a New Food culture
+                    </button>
+
                 </div>
                 <table>
                     <tr>
@@ -194,7 +199,8 @@ if ($meal_type_result->num_rows > 0) {
 
                 <div class="title1">
                     <h2>Meal Types</h2>
-                    <button onclick="showForm('form2')">+ Add New Meal Type</button>
+                    <button class="button-add" onclick="showForm('form2')"><i class="material-icons">add</i> Add New
+                        Meal Type</button>
                 </div>
                 <table>
                     <tr>
@@ -221,7 +227,8 @@ if ($meal_type_result->num_rows > 0) {
         <div class="table-container Foods-And-Drinks">
             <div class="title1">
                 <h2>Foods And Drinks</h2>
-                <button onclick="showForm('form3')">+ Add New Food or Drinks Item</button>
+                <button class="button-add" onclick="showForm('form3')"><i class="material-icons">add</i> Add New Food or
+                    Drinks Item</button>
             </div>
 
             <table>

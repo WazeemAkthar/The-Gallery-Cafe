@@ -252,7 +252,7 @@ th {
   width: 111px;
 }
 
-.button-edit:hover{
+.button-edit:hover {
   background-color: #31b0d5;
 }
 
@@ -265,8 +265,17 @@ th {
 }
 
 select {
-  width: 384px;
-  height: 36px;
+  width: 366px;
+  height: 34px;
   font-size: 20px;
   color: gray;
+}
+
+button {
+  display: flex;
+  gap: 3px;
+}
+
+a {
+  text-decoration: none;
 }

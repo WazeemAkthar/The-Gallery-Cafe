@@ -29,10 +29,13 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Manage Reservation</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../CSS/Admin_Dashboard.css">
 
 </head>
-<style>
+<!-- <style>
     button {
         background-color: #5bc0de;
         color: #fff;
@@ -75,15 +78,12 @@ $result = $conn->query($sql);
         background-color: #3e8e41;
         border-radius: 0;
     }
-</style>
+</style> -->
 
 <body>
-    <div class="button-container">
-        <a href="ManageMenu.php"><button>Manage Menu Foods and Drinks</button></a>
-        <a href="ManageReserv.php"><button type="button">Manage Reservations</button></a>
-        <a href="MangeAccount.php"><button>Create Staff or Admin Account</button></a>
-        <a href="users.php"><button>View Users</button></a>
-    </div>
+    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
+    <div id="adminNav"></div>
+
     <script>
         function showDashboard(dashboardId) {
             var forms = document.getElementsByClassName("Dashbord-Container");
@@ -133,6 +133,7 @@ $result = $conn->query($sql);
             }
         }
     </script>
+    <script src="../JS/components.js"></script>
 </body>
 
 </html>
