@@ -25,7 +25,7 @@ if (!isset($_SESSION['role_id'])) {
       <p>
         Experience the best dining in Colombo with our diverse cuisine options.
       </p>
-      <a href="../Pages/Menu.html" class="btn">Explore Our Menu</a>
+      <a href="../Pages/Menu.php" class="btn">Explore Our Menu</a>
     </div>
 
     <section id="specials">

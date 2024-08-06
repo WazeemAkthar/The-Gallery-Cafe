@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['role_id'] = $role_id;
 
             if ($role_id == 3) {
-                header("Location: ../Pages/admin.php");
+                header("Location: ../Pages/ManageMenu.php");
             } elseif ($role_id == 2) {
                 header("Location: ../Pages/operational-staff.php");
             } else {

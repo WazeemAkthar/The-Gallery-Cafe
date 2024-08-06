@@ -19,9 +19,12 @@ if ($conn->connect_error) {
 }
 
 // Fetch menu data with join
-$menu_sql = "SELECT menu.id, menu.item_name, menu.item_description, menu.item_price, food_culture.culture_name AS item_cultures, menu.item_type, menu.item_image, menu.created_at 
+$menu_sql = "SELECT menu.id, menu.item_name, menu.item_description, menu.item_price, 
+                    food_culture.culture_name AS item_cultures, meal_type.meal_type AS item_type, 
+                    menu.item_image, menu.created_at 
              FROM menu 
-             JOIN food_culture ON menu.item_cultures = food_culture.id";
+             JOIN food_culture ON menu.item_cultures = food_culture.id 
+             JOIN meal_type ON menu.item_type = meal_type.id";
 $menu_result = $conn->query($menu_sql);
 
 // Fetch food culture data
@@ -53,8 +56,6 @@ if ($meal_type_result->num_rows > 0) {
         $meal_types[] = $row;
     }
 }
-
-
 ?>
 
 
