@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,14 @@
     <link rel="stylesheet" href="../CSS/reservation.css">
     <title>Reservation - The Gallery Café</title>
 </head>
+
 <body>
     <div id="header"></div> <!-- Placeholder for header -->
-    
+
     <main>
         <section class="reservation-section">
             <h2>Make a Reservation</h2>
-            <form id="reservationForm">
+            <form id="reservationForm" action="../Backend/add_reservation.php" method="post">
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>
@@ -46,10 +48,11 @@
             </form>
         </section>
     </main>
-    
+
     <div id="footer"></div> <!-- Placeholder for footer -->
-    
+
     <script src="../JS/components.js"></script>
     <script src="../JS/scripts.js"></script>
 </body>
+
 </html>
