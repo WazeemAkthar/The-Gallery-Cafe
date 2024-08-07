@@ -13,7 +13,7 @@ if (!isset($_SESSION['role_id'])) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../CSS/Home.css" />
-  <link rel="stylesheet" href="../CSS/menu.css" />
+  <!-- <link rel="stylesheet" href="../CSS/menu.css" /> -->
   <title>The Gallery Café</title>
 </head>
 
@@ -32,8 +32,65 @@ if (!isset($_SESSION['role_id'])) {
 
   <section id="specials">
     <h1>Special food and beverages</h1>
-    <div class="menu-grid" id="menuGrid">
-      <!-- Special food and beverages items will be inserted here dynamically -->
+    <div class="card-container">
+      <div class="card">
+        <img src="../menu Images/image_01.jpg" alt="Card Image" class="card-image">
+        <div class="card-details">
+          <h3>Processed Fruit, Vegetable and Juice</h3>
+          <p>Sri Lanka is blessed with natural resources and climatic conditions from temperate, to tropical to sub
+            tropical, suitable for the growing of a wide range of fruits and vegetables.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../menu Images/rice-and-cereal-based-products.jpg" alt="Card Image" class="card-image">
+        <div class="card-details">
+          <h3>Rice and Cereal Based Products</h3>
+          <p>Rice and cereals are a preferred option to wheat-based products as they offer higher nutritional value for
+            those consumers preferring high fiber foods. For centuries, Sri Lanka’s staple food has been rice, most
+            consuming it three times a day. As a result it is said that ancient Sri Lankan kings had giants who “moved
+            mountains” in their clans.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../menu Images/Bakery.webp" alt="Card Image" class="card-image">
+        <div class="card-details">
+          <h3>Confectionery and Bakery Products</h3>
+          <p>Confectionery and bakery products show a high export growth and an increasing demand across five
+            continents.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../menu Images/beverages.jpg" alt="Card Image" class="card-image">
+        <div class="card-details">
+          <h3>Beverages</h3>
+          <p>Sri Lankan beverage manufacturers and suppliers export both alcoholic beverages and non- alcoholic
+            beverages. Alcoholic beverages such as arrack, a smooth and popular drink and beer are also offered from
+            distilleries and breweries manufacturing from centuries ago now adding modern equipment and processes to
+            improve quality and volumes.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../menu Images/Vegan_biscuts.jpg" alt="Card Image" class="card-image">
+        <div class="card-details">
+          <h3>Vegan Biscuits</h3>
+          <p>These biscuits do not contain any animal products, instead, they are made using vegetables, and certain
+            types of grains. It has to be noted that the taste factor of these biscuits are unbelievable while they are
+            also present in various flavours with various additives.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../menu Images/vegan-curry-noodles.jpg" alt="Card Image" class="card-image">
+        <div class="card-details">
+          <h3>Vegan Noodles</h3>
+          <p>All the ingredients used in the making of these noodles are vegan friendly. This can be enjoyed by both
+            vegans and non-vegans.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -151,67 +208,6 @@ if (!isset($_SESSION['role_id'])) {
     });
 
   </script>
-  <script>
-    // Sample menu items data
-    const menuItems = [
-      {
-        id: 1,
-        name: "Sri Lankan Curry",
-        description: "A delicious blend of spices and herbs.",
-        price: "$10",
-        image: "../menu Images/Sri_Lankan_Rice_and_Curry.jpg",
-      },
-      {
-        id: 2,
-        name: "Chinese Noodles",
-        description: "Stir-fried noodles with vegetables and meat.",
-        price: "$12",
-        image: "../menu Images/Chinese Noodles.avif",
-      },
-      {
-        id: 3,
-        name: "Italian Pizza",
-        description: "Classic margherita pizza with fresh ingredients.",
-        price: "$15",
-        image: "../menu Images/Italian Pizza.webp",
-      },
-      // { id: 4, name: 'Sri Lankan Curry', description: 'A delicious blend of spices and herbs.', price: '$10', image: '../menu Images/Sri_Lankan_Rice_and_Curry.jpg' },
-      // { id: 5, name: 'Chinese Noodles', description: 'Stir-fried noodles with vegetables and meat.', price: '$12', image: '../menu Images/Chinese Noodles.avif' },
-      // { id: 6, name: 'Italian Pizza', description: 'Classic margherita pizza with fresh ingredients.', price: '$15', image: '../menu Images/Italian Pizza.webp' },
-      // Add more menu items as needed
-    ];
-
-    // Function to display menu items
-    function displayMenuItems(items) {
-      const menuGrid = document.getElementById("menuGrid");
-      menuGrid.innerHTML = ""; // Clear the grid
-      items.forEach((item) => {
-        const menuItem = document.createElement("div");
-        menuItem.className = "menu-item";
-        menuItem.innerHTML = `
-                  <img src="${item.image}" alt="${item.name}">
-                  <h3>${item.name}</h3>
-                  <p>${item.description}</p>
-                  <p class="price">${item.price}</p>
-              `;
-        menuGrid.appendChild(menuItem);
-      });
-    }
-
-    // Initial display of all menu items
-    displayMenuItems(menuItems);
-
-    // Search functionality
-    document
-      .getElementById("searchBar")
-      .addEventListener("input", function (event) {
-        const searchText = event.target.value.toLowerCase();
-        const filteredItems = menuItems.filter((item) =>
-          item.name.toLowerCase().includes(searchText)
-        );
-        displayMenuItems(filteredItems);
-      });
-  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", (event) => {
@@ -230,7 +226,7 @@ if (!isset($_SESSION['role_id'])) {
         });
       }
     });
-  </script>
-</body>
+  </scrip >
+</body >
 
-</html>
+</html >
