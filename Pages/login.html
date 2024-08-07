@@ -80,7 +80,7 @@ body {
 
 button {
   display: inline-block;
-  background: linear-gradient(to right, #333333 0%, #a9a9a9 100%);
+  background: linear-gradient(to right, #a1b72c 0%, #dae797 100%);
   color: #fff;
   padding: 10px 20px;
   font-size: 16px;
@@ -92,97 +92,13 @@ button {
   letter-spacing: 2px;
   border-radius: 5px;
   width: -webkit-fill-available;
+  border: none !important;
 }
 
 button:hover {
-  background: linear-gradient(to right, #a9a9a9 0%, #333333 100%);
+  background: linear-gradient(to left, #a1b72c 0%, #dae797 100%);
   color: #ffffff;
-  border: 1px solid #333;
   cursor: pointer;
-}
-
-button span {
-  position: absolute;
-  display: block;
-}
-
-button span:nth-child(1) {
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 2px;
-  background-color: #333;
-  animation: animate1 1s linear infinite;
-}
-
-@keyframes animate1 {
-  0% {
-    left: -100%;
-  }
-  50%,
-  100% {
-    left: 100%;
-  }
-}
-
-a span:nth-child(2) {
-  top: -100%;
-  right: 0;
-  width: 2px;
-  height: 100%;
-  background-color: #333;
-  animation: animate2 1s linear infinite;
-  animation-delay: 0.25s;
-}
-
-@keyframes animate2 {
-  0% {
-    top: -100%;
-  }
-  50%,
-  100% {
-    top: 100%;
-  }
-}
-
-button span:nth-child(3) {
-  bottom: 0;
-  right: -100%;
-  width: 100%;
-  height: 2px;
-  background-color: #333;
-  animation: animate3 1s linear infinite;
-  animation-delay: 0.5s;
-}
-
-@keyframes animate3 {
-  0% {
-    right: -100%;
-  }
-  50%,
-  100% {
-    right: 100%;
-  }
-}
-
-button span:nth-child(4) {
-  bottom: -100%;
-  left: 0;
-  width: 2px;
-  height: 100%;
-  background-color: #333;
-  animation: animate4 1s linear infinite;
-  animation-delay: 0.75s;
-}
-
-@keyframes animate4 {
-  0% {
-    bottom: -100%;
-  }
-  50%,
-  100% {
-    bottom: 100%;
-  }
 }
 
 .password-toggle-icon {
@@ -258,7 +174,7 @@ a {
             name="loginEmail"
             required />
             <div class="underline"></div>
-            <label>Username</label>
+            <label>Email</label>
             <span class="email-icon"><i class="fa fa-envelope"></i></span>
           </div>
           <div class="user-box">
@@ -271,10 +187,6 @@ a {
             <span class="password-toggle-icon"><i class="fas fa-eye-slash"></i></span>
           </div>
           <button type="submit">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
             Sing in
           </button>
          
