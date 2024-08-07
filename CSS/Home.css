@@ -7,35 +7,77 @@ body {
 nav {
   background-color: rgba(0, 0, 0, 0.42);
   color: rgb(0, 0, 0) !important;
-  padding: 10px 20px;
+  padding: 20px 20px;
   text-align: center;
-  width: fit-content;
-  border-radius: 50px;
-  margin-top: 10px;
+  width: 100%;
+  /* border-radius: 50px; */
+  /* margin-top: 10px; */
   margin-left: auto;
   margin-right: auto;
   backdrop-filter: blur(14px);
-  font-family: 'Audiowide';
-  font-size: 30px;
-  font-weight: 500;
+  font-family: "Audiowide";
+  font-size: 20px;
+  font-weight: 400;
   position: sticky;
-  top: 10px;
+  top: 0;
   z-index: 100;
 }
+
 nav ul {
   list-style: none;
   padding: 0;
   margin-top: 8px;
   margin-bottom: 8px;
 }
+
 nav ul li {
   display: inline;
   margin: 0 10px;
 }
+
 nav ul li a {
   color: rgb(255, 255, 255) !important;
   text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+  padding: 5px 10px;
 }
+
+nav ul li a::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 4px;
+  background: white;
+  transition: width 0.5s;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+nav ul li a.active::after {
+  width: 100%;
+}
+
+nav ul li a:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
+  background-color: rgba(255, 255, 255, 0.329);
+}
+
+nav ul li a.active {
+  background-color: rgba(255, 255, 255, 0.329);
+  color: rgb(255, 255, 255) !important;
+}
+
+nav ul li a i {
+  margin-right: 8px; /* Add some space between the icon and the text */
+}
+
 main {
   padding: 20px;
 }
@@ -49,7 +91,7 @@ main {
 }
 /* Hero Section */
 .hero {
-  background-image: url('../The Gallery Café Images/hero.jpg');
+  background-image: url("../The Gallery Café Images/hero.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -65,17 +107,17 @@ main {
 }
 
 .hero::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(2px); 
+  backdrop-filter: blur(2px);
 }
 
-.hero-content{
+.hero-content {
   color: rgb(255, 255, 255);
   position: absolute;
   top: 50%;
@@ -111,19 +153,22 @@ section {
   text-align: center;
 }
 
-.special, .event {
+.special,
+.event {
   background-color: #f0f0f0;
   padding: 20px;
   margin: 20px 0;
   border-radius: 5px;
 }
 
-.special h3, .event h3 {
+.special h3,
+.event h3 {
   font-size: 28px;
   margin-bottom: 10px;
 }
 
-.special p, .event p {
+.special p,
+.event p {
   font-size: 16px;
   margin-bottom: 10px;
 }
