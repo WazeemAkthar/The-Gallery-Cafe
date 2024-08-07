@@ -64,135 +64,144 @@ if ($meal_type_result->num_rows > 0) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Restaurant Menu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      padding: 20px;
+    }
 
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .search-bar input {
+      width: 50%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .filter-buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .filter-buttons h3 {
+      margin-bottom: 10px;
+    }
+
+    .filter-cultures,
+    .filter-meal-types {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .filter-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .filter-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .menu-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .meal-type-group {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .meal-type-group h2 {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    .menu-card {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      margin: 15px;
+      text-align: left;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-card:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 150px;
+      border-radius: 8px 8px 0 0;
+      object-fit: cover;
+    }
+
+    .menu-card h3 {
+      margin: 10px 0;
+      font-size: 1.2em;
+    }
+
+    .menu-card p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .description {
+      padding: 15px;
+    }
+
+    .menu-card p .price {
+      color: red;
+    }
+
+    .cart-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .cart-link i {
+      margin-right: 10px;
+    }
+
+    .cart-link .cart-count {
+      background-color: red;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 50%;
+      font-size: 0.8em;
+      margin-left: 5px;
+    }
+  </style>
 </head>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .container {
-    max-width: 1200px;
-    width: 100%;
-    padding: 20px;
-  }
-
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .search-bar {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  .search-bar input {
-    width: 50%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  .filter-buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-
-  .filter-buttons h3 {
-    margin-bottom: 10px;
-  }
-
-  .filter-cultures,
-  .filter-meal-types {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .filter-btn {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px 10px 20px;
-    margin: 5px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .filter-btn:hover {
-    background-color: #0056b3;
-  }
-
-  .menu-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .meal-type-group {
-    display: flex;
-    margin-bottom: 20px;
-  }
-
-  .meal-type-group h2 {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border-radius: 4px;
-  }
-
-  .menu-card {
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 250px;
-    margin: 15px;
-    text-align: left;
-    transition: transform 0.3s ease;
-  }
-
-  .menu-card:hover {
-    transform: scale(1.05);
-    cursor: pointer;
-  }
-
-  .menu-card img {
-    width: 100%;
-    height: 150px;
-    border-radius: 8px 8px 0 0;
-    object-fit: cover;
-  }
-
-  .menu-card h3 {
-    margin: 10px 0;
-    font-size: 1.2em;
-  }
-
-  .menu-card p {
-    margin: 5px 0;
-    color: #555;
-  }
-
-  .discription {
-    padding: 15px;
-  }
-
-  .menu-card p .pricec {
-    color: red;
-  }
-</style>
 
 <body>
   <div id="header"></div>
@@ -212,15 +221,14 @@ if ($meal_type_result->num_rows > 0) {
           </button>
         <?php endforeach; ?>
       </div>
-      <div class="filter-meal-types">
-        <h3>Meal Types</h3>
-        <button class="filter-btn" onclick="showAllItems()">All</button>
-        <!-- Meal Type Buttons -->
-        <?php foreach ($meal_types as $meal_type): ?>
-          <button class="filter-btn" onclick="filterItems('meal_type', '<?php echo $meal_type['meal_type']; ?>')">
-            <?php echo $meal_type['meal_type']; ?>
-          </button>
-        <?php endforeach; ?>
+
+      <div class="cart-link">
+        <a href="cart.php" class="filter-btn">
+          <i class="fas fa-shopping-cart"></i> View Cart
+          <?php if (isset($_SESSION['cart'])): ?>
+            <span class="cart-count"><?php echo count($_SESSION['cart']); ?></span>
+          <?php endif; ?>
+        </a>
       </div>
     </div>
     <div id="menuContainer" class="menu-container">
@@ -233,11 +241,13 @@ if ($meal_type_result->num_rows > 0) {
               <div class="menu-card" data-culture="<?php echo $item['item_cultures']; ?>"
                 data-meal-type="<?php echo $item['item_type']; ?>">
                 <img src="<?php echo $item['item_image']; ?>" alt="<?php echo $item['item_name']; ?>">
-                <div class="discription">
+                <div class="description">
                   <h3><?php echo $item['item_name']; ?></h3>
                   <p><?php echo $item['item_description']; ?></p>
                   <p>Rs.<?php echo $item['item_price']; ?></p>
                   <p><?php echo $item['item_cultures']; ?></p>
+                  <button class="filter-btn" onclick="buyItem(<?php echo $item['id']; ?>)">Buy</button>
+                  <button class="filter-btn" onclick="addToCart(<?php echo $item['id']; ?>)">Add to Cart</button>
                 </div>
               </div>
             <?php endif; ?>
@@ -245,11 +255,12 @@ if ($meal_type_result->num_rows > 0) {
         </div>
       <?php endforeach; ?>
     </div>
+
   </div>
   <div id="footer"></div>
-  <script>document.addEventListener("DOMContentLoaded", function () {
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
       const searchInput = document.getElementById("searchInput");
-      const menuContainer = document.getElementById("menuContainer");
       const menuCards = document.querySelectorAll(".menu-card");
 
       searchInput.addEventListener("keyup", function () {
@@ -268,7 +279,7 @@ if ($meal_type_result->num_rows > 0) {
     function filterItems(type, value) {
       const menuCards = document.querySelectorAll(".menu-card");
       menuCards.forEach(card => {
-        if (card.dataset[type] === value) {
+        if (card.dataset[type].toLowerCase() === value.toLowerCase()) {
           card.style.display = "";
         } else {
           card.style.display = "none";
@@ -281,6 +292,35 @@ if ($meal_type_result->num_rows > 0) {
       menuCards.forEach(card => {
         card.style.display = "";
       });
+    }
+
+    function buyItem(id) {
+      window.location.href = '../Backend/process_buy.php?id=' + id;
+    }
+
+    function addToCart(id) {
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "../Backend/add_to_cart.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          alert(xhr.responseText);
+          updateCartCount();
+        }
+      };
+      xhr.send("id=" + id);
+    }
+
+    function updateCartCount() {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "../Backend/cart_count.php", true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          const cartCount = document.querySelector(".cart-count");
+          cartCount.textContent = xhr.responseText;
+        }
+      };
+      xhr.send();
     }
   </script>
   <script src="../JS/components.js"></script>
