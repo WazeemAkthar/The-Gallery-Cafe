@@ -2,11 +2,11 @@
   display: none;
 }
 
-body {
+.container {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f8f8f8;
   margin: 0;
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
   text-align: center;
 }
 
@@ -277,4 +277,5 @@ button {
 
 a {
   text-decoration: none;
+  width: 25%;
 }

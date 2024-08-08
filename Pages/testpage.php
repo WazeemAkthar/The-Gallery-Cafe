@@ -1,225 +1,130 @@
-<?php
-session_start();
-if (!isset($_SESSION['role_id'])) {
-    header("Location: login.html");
-    exit();
-}
-
-// Set the timezone
-date_default_timezone_set('America/New_York');
-
-// Get current date and time
-$currentDate = date('Y-m-d');
-$currentTime = date('H:i');
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Navigation Bar with Underline</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <style>
     body {
-        align-items: center;
-        background-color: #000;
-        display: flex;
-        justify-content: center;
-        height: 100vh;
+        font-family: Arial, sans-serif;
     }
 
-    .form {
-        background-color: #15172b;
-        border-radius: 20px;
-        box-sizing: border-box;
-        height: 600px;
-        padding: 20px;
-        width: 620px;
-    }
-
-    .title {
-        color: #eee;
-        font-family: sans-serif;
-        font-size: 36px;
-        font-weight: 600;
-        margin-top: 30px;
-    }
-
-    .subtitle {
-        color: #eee;
-        font-family: sans-serif;
-        font-size: 16px;
-        font-weight: 600;
-        margin-top: 10px;
-    }
-
-    .input-container {
-        height: 50px;
+    .navbar {
         position: relative;
-        width: 100%;
     }
 
-    .ic1 {
-        margin-top: 40px;
-    }
-
-    .ic2 {
-        margin-top: 30px;
-    }
-
-    .input {
-        background-color: #303245;
-        border-radius: 12px;
-        border: 0;
-        box-sizing: border-box;
-        color: #eee;
-        font-size: 18px;
-        height: 100%;
-        outline: 0;
-        padding: 4px 20px 0;
-        width: 100%;
-    }
-
-    .cut {
-        background-color: #15172b;
-        border-radius: 10px;
-        height: 20px;
-        left: 20px;
-        position: absolute;
-        top: -20px;
-        transform: translateY(0);
-        transition: transform 200ms;
-        width: 76px;
-    }
-
-    .cut-short {
-        width: 50px;
-    }
-
-    .input:focus~.cut,
-    .input:not(:placeholder-shown)~.cut {
-        transform: translateY(8px);
-    }
-
-    .placeholder {
-        color: #65657b;
-        font-family: sans-serif;
-        left: 20px;
-        line-height: 14px;
-        pointer-events: none;
-        position: absolute;
-        transform-origin: 0 50%;
-        transition: transform 200ms, color 200ms;
-        top: 20px;
-    }
-
-    .input:focus~.placeholder,
-    .input:not(:placeholder-shown)~.placeholder {
-        transform: translateY(-30px) translateX(10px) scale(0.75);
-    }
-
-    .input:not(:placeholder-shown)~.placeholder {
-        color: #808097;
-    }
-
-    .input:focus~.placeholder {
-        color: #dc2f55;
-    }
-
-    .submit {
-        background-color: #08d;
-        border-radius: 12px;
-        border: 0;
-        box-sizing: border-box;
-        color: #eee;
-        cursor: pointer;
-        font-size: 18px;
-        height: 50px;
-        margin-top: 70px;
-        // outline: 0;
-        text-align: center;
-        width: 100%;
-    }
-
-    .submit:active {
-        background-color: #06b;
-    }
-
-    .form-reserv {
+    .nav-list {
         display: flex;
         justify-content: space-between;
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
 
-    textarea {
-        background-color: #303245;
-        border-radius: 12px;
-        border: 0;
-        box-sizing: border-box;
-        color: #eee;
-        font-size: 18px;
-        outline: 0;
-        padding: 4px 20px 0;
+    .nav-item {
+        margin: 20px;
+        width: 25%;
+    }
+
+    .nav-link {
+        text-decoration: none;
+        color: #000;
+        padding: 10px 0;
+        position: relative;
+        width: 25%;
+    }
+
+    .nav-link:hover {
+        background-color: #007bff;
+    }
+
+    .underline {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        margin-top: 2px;
+        height: 4px;
+        width: 0;
+        background-color: #007bf2;
+        transition: left 0.3s, width 0.3s;
+    }
+
+    .nav-link.active~.underline {
         width: 100%;
-        margin-bottom: 10px;
+    }
+
+    .nav-link:hover~.underline {
+        width: 100%;
+    }
+
+    .nav-link.active {
+        font-weight: bold;
     }
 </style>
 
 <body>
-    <form class="form" id="reservationForm" action="../Backend/add_reservation.php" method="post">
-        <div class="title">Welcome</div>
-        <div class="subtitle">Let's Make a Reservation</div>
-        <div class="form-reserv">
-            <div>
-                <div class="input-container ic1">
-                    <input id="name" class="input" type="text" placeholder=" " name="name" />
-                    <div class="cut"></div>
-                    <label for="tname" class="placeholder">Name</label>
-                </div>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <a href="#" class="nav-link" id="es6">
+                <li class="nav-item">ES6</li>
+            </a>
+            <a href="#" class="nav-link" id="flexbox">
+                <li class="nav-item">Flexbox</li>
+            </a>
+            <a href="#" class="nav-link" id="react">
+                <li class="nav-item">React</li>
+            </a>
+            <a href="#" class="nav-link" id="angular">
+                <li class="nav-item">Angular</li>
+            </a>
+            <a href="#" class="nav-link" id="other">
+                <li class="nav-item">Other</li>
+            </a>
+        </ul>
+        <div class="underline"></div>
+    </nav>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const underline = document.querySelector('.underline');
 
-                <div class="input-container ic2">
-                    <input id="email" class="input" type="text" placeholder=" " name="email" />
-                    <div class="cut cut-short"></div>
-                    <label for="email" class="placeholder">Email</label>
-                </div>
+            navLinks.forEach(link => {
+                link.addEventListener('mouseenter', function () {
+                    const { left, width } = this.getBoundingClientRect();
+                    const { left: containerLeft } = this.closest('.navbar').getBoundingClientRect();
+                    underline.style.left = `${left - containerLeft}px`;
+                    underline.style.width = `${width}px`;
+                });
 
-                <div class="input-container ic2">
-                    <input id="phone" class="input" type="tel" placeholder=" " name="phone"/>
-                    <div class="cut"></div>
-                    <label for="phone" class="placeholder">phone</label>
-                </div>
-            </div>
+                link.addEventListener('mouseleave', function () {
+                    underline.style.width = '0';
+                });
 
-            <div>
-                <div class="input-container ic1">
-                    <input id="date" class="input" type="date" placeholder=" " name="date" value="<?php echo $currentDate; ?>" />
-                    <div class="cut"></div>
-                    <label for="date" class="placeholder">date</label>
-                </div>
-                <div class="input-container ic2">
-                    <input id="time" class="input" type="time" placeholder=" " name="time" value="<?php echo $currentTime; ?>" />
-                    <div class="cut"></div>
-                    <label for="time" class="placeholder">Time</label>
-                </div>
-                <div class="input-container ic2">
-                    <input id="guests" class="input" type="number" name="guests" placeholder=" " />
-                    <div class="cut cut-short"></div>
-                    <label for="guests" class="placeholder">Guests</label>
-                </div>
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                    const { left, width } = this.getBoundingClientRect();
+                    const { left: containerLeft } = this.closest('.navbar').getBoundingClientRect();
+                    underline.style.left = `${left - containerLeft}px`;
+                    underline.style.width = `${width}px`;
+                });
+            });
 
-            </div>
+            // Set initial active link and underline position
+            const activeLink = document.querySelector('.nav-link.active');
+            if (activeLink) {
+                const { left, width } = activeLink.getBoundingClientRect();
+                const { left: containerLeft } = activeLink.closest('.navbar').getBoundingClientRect();
+                underline.style.left = `${left - containerLeft}px`;
+                underline.style.width = `${width}px`;
+            }
+        });
 
-
-        </div>
-        <div class="input-container ic2">
-            <div class="cut cut-short"></div>
-            <label for="massage" class="placeholder">Special Requests</label>
-            <textarea id="message" name="message" rows="4"></textarea>
-        </div>
-
-        <button type="text" class="submit">submit</button>
-    </form>
+    </script>
 </body>
 
 </html>

@@ -1,18 +1,20 @@
 .button-container {
   display: flex;
+  justify-content: space-between;
   width: 100%;
 }
 
 /* Button styling */
 .button-container button {
   flex: 1;
-  padding: 10px 20px;
+  padding: 50px 20px;
   border: none;
   background-color: #4caf50;
   color: white;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 0;
 }
 
 /* Hover effect for buttons */
@@ -25,4 +27,11 @@
 .button-container button.active {
   background-color: #3e8e41;
   border-radius: 0;
+}
+
+.adminButton2 {
+  width: 100%;
+  place-content: center;
+  margin: 0;
+  padding: 50px 20px;
 }

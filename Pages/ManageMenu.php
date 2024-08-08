@@ -73,206 +73,209 @@ if ($meal_type_result->num_rows > 0) {
 
 <body>
     <div id="adminNav"></div>
-    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
+    <div class="container">
 
-    <!----------------------------------------------- Manage Menu Foods and Drinks ----------------------------------------------->
-    <div id="dashboard2">
-        <!-- Add a New Food culture -->
-        <div id="form1" class="form-container">
-            <h3>Add a New Food culture</h3>
-            <form action="../Backend/add_food_culture.php" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="item-name">Food culture:</label>
-                    <input type="text" id="item-name" name="item-name" required />
-                </div>
-                <div class="button-contaiiner">
-                    <button type="submit">Save Item</button>
-                    <button type="cancel" onclick="showForm(null)">Cancel</button>
-                </div>
-            </form>
-        </div>
+        <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
 
-        <!-- Add New Meal Type -->
-        <div id="form2" class="form-container">
-            <h3>Add New Meal Type</h3>
-            <form action="../Backend/add_meal_type.php" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="item-name">Meal Type:</label>
-                    <input type="text" id="item-name" name="item-name" required />
-                </div>
-                <div class="button-contaiiner">
-                    <button type="submit">Save Item</button>
-                    <button type="cancel" onclick="showForm(null)">Cancel</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Add New Food or Drinks Item -->
-
-        <div id="form3" class="form-container">
-            <h3>Add Menu Item</h3>
-            <form action="../Backend/add_menu_item.php" method="post" enctype="multipart/form-data">
-                <div class="form-style">
+        <!----------------------------------------------- Manage Menu Foods and Drinks ----------------------------------------------->
+        <div id="dashboard2">
+            <!-- Add a New Food culture -->
+            <div id="form1" class="form-container">
+                <h3>Add a New Food culture</h3>
+                <form action="../Backend/add_food_culture.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="item-name">Item Name:</label>
-                        <input type="text" id="item-name" name="item_name" required />
+                        <label for="item-name">Food culture:</label>
+                        <input type="text" id="item-name" name="item-name" required />
                     </div>
+                    <div class="button-contaiiner">
+                        <button type="submit">Save Item</button>
+                        <button type="cancel" onclick="showForm(null)">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Add New Meal Type -->
+            <div id="form2" class="form-container">
+                <h3>Add New Meal Type</h3>
+                <form action="../Backend/add_meal_type.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="item-cultures">Food Cultures:</label>
-                        <select id="item-cultures" name="item_cultures" required>
-                            <?php
+                        <label for="item-name">Meal Type:</label>
+                        <input type="text" id="item-name" name="item-name" required />
+                    </div>
+                    <div class="button-contaiiner">
+                        <button type="submit">Save Item</button>
+                        <button type="cancel" onclick="showForm(null)">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Add New Food or Drinks Item -->
+
+            <div id="form3" class="form-container">
+                <h3>Add Menu Item</h3>
+                <form action="../Backend/add_menu_item.php" method="post" enctype="multipart/form-data">
+                    <div class="form-style">
+                        <div class="form-group">
+                            <label for="item-name">Item Name:</label>
+                            <input type="text" id="item-name" name="item_name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="item-cultures">Food Cultures:</label>
+                            <select id="item-cultures" name="item_cultures" required>
+                                <?php
+                                foreach ($food_cultures as $culture) {
+                                    echo "<option value=\"" . $culture['id'] . "\">" . $culture['culture_name'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-price">Price:</label>
+                            <input type="number" id="item-price" name="item_price" step="0.01" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="item-description">Description:</label>
+                            <input type="text" id="item-description" name="item_description" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="item-type">Meal Type:</label>
+                            <select id="item-type" name="item_type" required>
+                                <?php
+                                foreach ($meal_types as $meal_type) {
+                                    echo "<option value=\"" . $meal_type['id'] . "\">" . $meal_type['meal_type'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-image">Image:</label>
+                            <input type="file" id="item-image" name="item_image" required />
+                        </div>
+                    </div>
+                    <div class="button-contaiiner">
+                        <button type="submit">Save Item</button>
+                        <button type="cancel" onclick="showForm(null)">Cancel</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="table-card">
+                <!-- Food Cultures Table -->
+                <div class="table-container Food-Cultures">
+
+                    <div class="title1">
+                        <h2>Food Cultures</h2>
+
+                        <button class="button-add" onclick="showForm('form1')">
+                            <i class="material-icons">add</i>
+                            Add a New Food culture
+                        </button>
+
+                    </div>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Culture Name</th>
+                            <th>Created At</th>
+                        </tr>
+                        <?php
+                        if (!empty($food_cultures)) {
                             foreach ($food_cultures as $culture) {
-                                echo "<option value=\"" . $culture['id'] . "\">" . $culture['culture_name'] . "</option>";
+                                echo "<tr>";
+                                echo "<td>{$culture['id']}</td>";
+                                echo "<td>{$culture['culture_name']}</td>";
+                                echo "<td>{$culture['created_at']}</td>";
+                                echo "</tr>";
                             }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="item-price">Price:</label>
-                        <input type="number" id="item-price" name="item_price" step="0.01" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="item-description">Description:</label>
-                        <input type="text" id="item-description" name="item_description" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="item-type">Meal Type:</label>
-                        <select id="item-type" name="item_type" required>
-                            <?php
-                            foreach ($meal_types as $meal_type) {
-                                echo "<option value=\"" . $meal_type['id'] . "\">" . $meal_type['meal_type'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="item-image">Image:</label>
-                        <input type="file" id="item-image" name="item_image" required />
-                    </div>
-                </div>
-                <div class="button-contaiiner">
-                    <button type="submit">Save Item</button>
-                    <button type="cancel" onclick="showForm(null)">Cancel</button>
-                </div>
-
-            </form>
-        </div>
-
-        <div class="table-card">
-            <!-- Food Cultures Table -->
-            <div class="table-container Food-Cultures">
-
-                <div class="title1">
-                    <h2>Food Cultures</h2>
-
-                    <button class="button-add" onclick="showForm('form1')">
-                        <i class="material-icons">add</i>
-                        Add a New Food culture
-                    </button>
-
-                </div>
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Culture Name</th>
-                        <th>Created At</th>
-                    </tr>
-                    <?php
-                    if (!empty($food_cultures)) {
-                        foreach ($food_cultures as $culture) {
-                            echo "<tr>";
-                            echo "<td>{$culture['id']}</td>";
-                            echo "<td>{$culture['culture_name']}</td>";
-                            echo "<td>{$culture['created_at']}</td>";
-                            echo "</tr>";
+                        } else {
+                            echo "<tr><td colspan='3'>No cultures found</td></tr>";
                         }
-                    } else {
-                        echo "<tr><td colspan='3'>No cultures found</td></tr>";
-                    }
-                    ?>
-                </table>
-            </div>
-
-            <!-- Menu Items Table -->
-            <div class="table-container Meal-Types">
-
-                <div class="title1">
-                    <h2>Meal Types</h2>
-                    <button class="button-add" onclick="showForm('form2')"><i class="material-icons">add</i> Add New
-                        Meal Type</button>
+                        ?>
+                    </table>
                 </div>
+
+                <!-- Menu Items Table -->
+                <div class="table-container Meal-Types">
+
+                    <div class="title1">
+                        <h2>Meal Types</h2>
+                        <button class="button-add" onclick="showForm('form2')"><i class="material-icons">add</i> Add New
+                            Meal Type</button>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Meal Type</th>
+                            <th>Created At</th>
+                        </tr>
+                        <?php
+                        if (!empty($meal_types)) {
+                            foreach ($meal_types as $type) {
+                                echo "<tr>";
+                                echo "<td>{$type['id']}</td>";
+                                echo "<td>{$type['meal_type']}</td>";
+                                echo "<td>{$type['created_at']}</td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='3'>No meal types found</td></tr>";
+                        }
+                        ?>
+                    </table>
+                </div>
+            </div>
+            <div class="table-container Foods-And-Drinks">
+                <div class="title1">
+                    <h2>Foods And Drinks</h2>
+                    <button class="button-add" onclick="showForm('form3')"><i class="material-icons">add</i> Add New
+                        Food or
+                        Drinks Item</button>
+                </div>
+
                 <table>
                     <tr>
                         <th>ID</th>
+                        <th>Item Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Food Cultures</th>
                         <th>Meal Type</th>
+                        <th>Image</th>
                         <th>Created At</th>
+                        <th>Actions</th>
                     </tr>
                     <?php
-                    if (!empty($meal_types)) {
-                        foreach ($meal_types as $type) {
+                    if (!empty($menu_items)) {
+                        foreach ($menu_items as $item) {
                             echo "<tr>";
-                            echo "<td>{$type['id']}</td>";
-                            echo "<td>{$type['meal_type']}</td>";
-                            echo "<td>{$type['created_at']}</td>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo "<tr><td colspan='3'>No meal types found</td></tr>";
-                    }
-                    ?>
-                </table>
-            </div>
-        </div>
-        <div class="table-container Foods-And-Drinks">
-            <div class="title1">
-                <h2>Foods And Drinks</h2>
-                <button class="button-add" onclick="showForm('form3')"><i class="material-icons">add</i> Add New Food or
-                    Drinks Item</button>
-            </div>
-
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Item Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Food Cultures</th>
-                    <th>Meal Type</th>
-                    <th>Image</th>
-                    <th>Created At</th>
-                    <th>Actions</th>
-                </tr>
-                <?php
-                if (!empty($menu_items)) {
-                    foreach ($menu_items as $item) {
-                        echo "<tr>";
-                        echo "<td>{$item['id']}</td>";
-                        echo "<td>{$item['item_name']}</td>";
-                        echo "<td>{$item['item_description']}</td>";
-                        echo "<td>{$item['item_price']}</td>";
-                        echo "<td>{$item['item_cultures']}</td>";
-                        echo "<td>{$item['item_type']}</td>";
-                        echo "<td><img src='{$item['item_image']}' alt='Item Image' style='width:100px;height:100px;'></td>";
-                        echo "<td>{$item['created_at']}</td>";
-                        echo "<td>
+                            echo "<td>{$item['id']}</td>";
+                            echo "<td>{$item['item_name']}</td>";
+                            echo "<td>{$item['item_description']}</td>";
+                            echo "<td>{$item['item_price']}</td>";
+                            echo "<td>{$item['item_cultures']}</td>";
+                            echo "<td>{$item['item_type']}</td>";
+                            echo "<td><img src='{$item['item_image']}' alt='Item Image' style='width:100px;height:100px;'></td>";
+                            echo "<td>{$item['created_at']}</td>";
+                            echo "<td>
                         <button class='button-edit' onclick=\"editItem({$item['id']})\"><i class='material-icons'>edit</i>Edit</button>
                         <button class='button-delete' onclick=\"deleteItem({$item['id']})\"><i class='material-icons'>delete</i>Delete</button>
                     </td>";
-                        echo "</tr>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='9'>No items found</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='9'>No items found</td></tr>";
-                }
-                ?>
-            </table>
+                    ?>
+                </table>
+            </div>
         </div>
+
+
+
+        <div id="formOverlay" class="form-overlay"></div>
     </div>
-
-
-
-    <div id="formOverlay" class="form-overlay"></div>
-
     <script>
 
         function showForm(formId) {
@@ -305,6 +308,7 @@ if ($meal_type_result->num_rows > 0) {
         }
     </script>
     <script src="../JS/components.js"></script>
+
 </body>
 
 </html>
