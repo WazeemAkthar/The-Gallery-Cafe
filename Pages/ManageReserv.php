@@ -32,8 +32,9 @@ if ($conn->connect_error) {
 </head>
 
 <body>
-    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
     <div id="adminNav"></div>
+    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
+
 
     <main>
         <div class="dashboard-container">

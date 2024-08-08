@@ -72,8 +72,9 @@ if ($meal_type_result->num_rows > 0) {
 </head>
 
 <body>
-    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
     <div id="adminNav"></div>
+    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
+
     <!----------------------------------------------- Manage Menu Foods and Drinks ----------------------------------------------->
     <div id="dashboard2">
         <!-- Add a New Food culture -->

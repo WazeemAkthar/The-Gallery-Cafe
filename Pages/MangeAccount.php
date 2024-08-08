@@ -31,8 +31,9 @@ $conn->close();
 </head>
 
 <body>
-    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
     <div id="adminNav"></div>
+    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
+
 
     <main>
         <div class="dashboard-container">
@@ -63,9 +64,9 @@ $conn->close();
                         </select>
                     </div>
                     <div class="button-contaiiner">
-                    <button type="submit">Create Account</button>
-                    <button type="cancel" onclick="showForm(null)">Cancel</button>
-                </div>
+                        <button type="submit">Create Account</button>
+                        <button type="cancel" onclick="showForm(null)">Cancel</button>
+                    </div>
                 </form>
             </div>
             <div class="table-card">
