@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ssdsss", $item_name, $item_description, $item_price, $item_cultures, $item_type, $target_file);
 
             if ($stmt->execute()) {
-                header("Location: ../Pages/Admin_Dashbord.php");
+                header("Location: ../Pages/ManageManu.php");
             } else {
                 echo "Error: " . $stmt->error;
             }
