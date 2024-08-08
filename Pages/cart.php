@@ -149,7 +149,22 @@ if (!isset($_SESSION['role_id'])) {
         font-size: 0.8em;
         margin-left: 5px;
     }
-</style>
+
+    .buttons {
+        display: flex;
+        gap: 3px;
+    }
+
+    .order-btn {
+        background-color: #5dbea3;
+        color: white;
+        padding: 10px;
+        margin: 5px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: -webkit-fill-available;
+    }
 </style>
 
 <body>
@@ -166,8 +181,9 @@ if (!isset($_SESSION['role_id'])) {
                             <p><?php echo $item['item_description']; ?></p>
                             <p>Rs.<?php echo $item['item_price']; ?></p>
                             <p><?php echo $item['item_cultures']; ?></p>
-                            <button onclick="buyItem(<?php echo $item['id']; ?>)">Buy</button>
-                            <button onclick="removeFromCart(<?php echo $item['id']; ?>)">Remove</button>
+                            <div class="buttons">
+                                <button class="order-btn" onclick="buyItem(<?php echo $item['id']; ?>)">Order Now</button>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>

@@ -92,7 +92,7 @@ if ($meal_type_result->num_rows > 0) {
 
     .filter-buttons {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: space-between;
       margin-bottom: 20px;
     }
@@ -109,17 +109,18 @@ if ($meal_type_result->num_rows > 0) {
     }
 
     .filter-btn {
-      background-color: #007bff;
+      background-color: #48AF90;
       color: white;
       padding: 10px 20px;
       margin: 5px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      text-decoration: none;
     }
 
     .filter-btn:hover {
-      background-color: #0056b3;
+      background-color: #5adbb5;
     }
 
     .menu-container {
@@ -185,12 +186,10 @@ if ($meal_type_result->num_rows > 0) {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 20px;
+      gap: 3px;
     }
 
-    .cart-link i {
-      margin-right: 10px;
-    }
+    .cart-link i {}
 
     .cart-link .cart-count {
       background-color: red;
@@ -199,6 +198,33 @@ if ($meal_type_result->num_rows > 0) {
       border-radius: 50%;
       font-size: 0.8em;
       margin-left: 5px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 3px;
+    }
+
+    .order-btn {
+      background-color: #5dbea3;
+      color: white;
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .Add-btn {
+      background-color: #5783db;
+      color: white;
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      gap: 3px;
     }
   </style>
 </head>
@@ -246,8 +272,11 @@ if ($meal_type_result->num_rows > 0) {
                   <p><?php echo $item['item_description']; ?></p>
                   <p>Rs.<?php echo $item['item_price']; ?></p>
                   <p><?php echo $item['item_cultures']; ?></p>
-                  <button class="filter-btn" onclick="buyItem(<?php echo $item['id']; ?>)">Buy</button>
-                  <button class="filter-btn" onclick="addToCart(<?php echo $item['id']; ?>)">Add to Cart</button>
+                  <div class="buttons">
+                    <button class="order-btn" onclick="buyItem(<?php echo $item['id']; ?>)">Order Now</button>
+                    <button class="Add-btn" onclick="addToCart(<?php echo $item['id']; ?>)"><i
+                        class="fas fa-shopping-cart"></i>Add to Cart</button>
+                  </div>
                 </div>
               </div>
             <?php endif; ?>
