@@ -7,7 +7,7 @@
 /* Button styling */
 .button-container button {
   flex: 1;
-  padding: 50px 20px;
+  padding: 30px 20px;
   border: none;
   background-color: #4caf50;
   color: white;
@@ -33,5 +33,8 @@
   width: 100%;
   place-content: center;
   margin: 0;
-  padding: 50px 20px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
