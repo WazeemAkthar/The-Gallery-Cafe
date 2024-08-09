@@ -18,27 +18,27 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-if (isset($_GET['id'])) {
+if (isset($_GET['id'])) 
     $item_id = intval($_GET['id']);
     
     // Fetch the item details from the database
     $sql = "SELECT * FROM menu WHERE id = $item_id";
     $result = $conn->query($sql);
     
-    if ($result->num_rows > 0) {
-        $item = $result->fetch_assoc();
-        // Process the purchase here, e.g., save to orders table
-        // This example simply removes the item from the cart
-        if (isset($_SESSION['cart'][$item_id])) {
-            unset($_SESSION['cart'][$item_id]);
+    if (isset($_GET['id']) && isset($_GET['count']) && isset($_SESSION['user_id'])) {
+        $item_id = $_GET['id'];
+        $user_count = $_GET['count'];
+        $user_id = $_SESSION['user_id'];
+      
+        $stmt = $conn->prepare("INSERT INTO orders (user_id, item_id, user_count, order_date) VALUES (?, ?, ?, NOW())");
+        $stmt->bind_param("iii", $user_id, $item_id, $user_count);
+      
+        if ($stmt->execute()) {
+          echo "Order placed successfully!";
+        } else {
+          echo "Failed to place order.";
         }
-        echo "Purchase successful!";
-    } else {
-        echo "Item not found.";
-    }
-} else {
-    echo "Invalid request.";
-}
-
-$conn->close();
+      
+        $stmt->close();
+      }      
 ?>

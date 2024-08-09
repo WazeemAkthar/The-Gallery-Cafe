@@ -72,3 +72,13 @@ CREATE TABLE parking_slots (
 --parking slots data--
 INSERT INTO parking_slots (slot_name, status) VALUES ('Slot 1', 'free'), ('Slot 2', 'occupied'), ('Slot 3', 'free');
 
+--orders--
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    item_id INT NOT NULL,
+    user_count INT NOT NULL,
+    order_date DATETIME NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (item_id) REFERENCES menu(id)
+);
