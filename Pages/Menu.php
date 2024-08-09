@@ -131,6 +131,7 @@ if ($meal_type_result->num_rows > 0) {
 
     .meal-type-group {
       display: flex;
+      flex-wrap: wrap;
       margin-bottom: 20px;
     }
 
