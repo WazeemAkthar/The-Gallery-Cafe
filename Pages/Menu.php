@@ -159,7 +159,7 @@ if ($meal_type_result->num_rows > 0) {
 
     .menu-card img {
       width: 100%;
-      height: 150px;
+      height: 100%;
       border-radius: 8px 8px 0 0;
       object-fit: cover;
     }
@@ -226,6 +226,28 @@ if ($meal_type_result->num_rows > 0) {
       display: flex;
       gap: 3px;
     }
+
+    .menu-card {
+      position: relative;
+      overflow: hidden;
+      height: 400px;
+      /* Existing styles */
+    }
+
+    .details-overlay {
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 15px;
+      text-align: left;
+      transition: bottom 0.3s ease;
+    }
+
+    .menu-card:hover .details-overlay {
+      bottom: 0;
+    }
   </style>
 </head>
 
@@ -267,7 +289,7 @@ if ($meal_type_result->num_rows > 0) {
               <div class="menu-card" data-culture="<?php echo $item['item_cultures']; ?>"
                 data-meal-type="<?php echo $item['item_type']; ?>">
                 <img src="<?php echo $item['item_image']; ?>" alt="<?php echo $item['item_name']; ?>">
-                <div class="description">
+                <div class="details-overlay">
                   <h3><?php echo $item['item_name']; ?></h3>
                   <p><?php echo $item['item_description']; ?></p>
                   <p>Rs.<?php echo $item['item_price']; ?></p>
@@ -284,6 +306,7 @@ if ($meal_type_result->num_rows > 0) {
         </div>
       <?php endforeach; ?>
     </div>
+
 
   </div>
   <div id="footer"></div>
@@ -324,8 +347,17 @@ if ($meal_type_result->num_rows > 0) {
     }
 
     function buyItem(id) {
-      window.location.href = '../Backend/process_buy.php?id=' + id;
+      <?php if (!isset($_SESSION['user_id'])): ?>
+        window.location.href = 'login.html';
+      <?php else: ?>
+        // Continue with ordering process
+        const userCount = prompt("How many users are going to order?");
+        if (userCount !== null) {
+          window.location.href = '../Backend/process_buy.php?id=' + id + '&count=' + userCount;
+        }
+      <?php endif; ?>
     }
+
 
     function addToCart(id) {
       const xhr = new XMLHttpRequest();
