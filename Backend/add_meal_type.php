@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("s", $meal_type);
 
     if ($stmt->execute()) {
-        echo "New meal type added successfully!";
+        header("Location: ../Pages/ManageMenu.php");
     } else {
         echo "Error: " . $stmt->error;
     }

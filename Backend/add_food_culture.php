@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("s", $culture_name);
 
     if ($stmt->execute()) {
-        echo "New food culture added successfully!";
+        header("Location: ../Pages/ManageMenu.php");
     } else {
         echo "Error: " . $stmt->error;
     }

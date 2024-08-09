@@ -62,3 +62,13 @@ CREATE TABLE reservations (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+--parking--
+CREATE TABLE parking_slots (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    slot_name VARCHAR(255) NOT NULL,
+    status ENUM('free', 'occupied') DEFAULT 'free'
+);
+
+--parking slots data--
+INSERT INTO parking_slots (slot_name, status) VALUES ('Slot 1', 'free'), ('Slot 2', 'occupied'), ('Slot 3', 'free');
+
