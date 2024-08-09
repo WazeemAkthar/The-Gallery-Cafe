@@ -113,6 +113,7 @@ if ($meal_type_result->num_rows > 0) {
                 </form>
             </div>
 
+
             <!-- Add New Food or Drinks Item -->
 
             <div id="form3" class="form-container">
@@ -180,7 +181,7 @@ if ($meal_type_result->num_rows > 0) {
                     </div>
                     <table>
                         <tr>
-                            <th>ID</th>
+                            <!-- <th>ID</th> -->
                             <th>Culture Name</th>
                             <th>Created At</th>
                         </tr>
@@ -188,9 +189,13 @@ if ($meal_type_result->num_rows > 0) {
                         if (!empty($food_cultures)) {
                             foreach ($food_cultures as $culture) {
                                 echo "<tr>";
-                                echo "<td>{$culture['id']}</td>";
+                                // echo "<td>{$culture['id']}</td>";
                                 echo "<td>{$culture['culture_name']}</td>";
                                 echo "<td>{$culture['created_at']}</td>";
+                                echo "<td class='Action-buttons'>";
+                                echo "<button class='button-edit' onclick=\"editCulture({$culture['id']})\"><i class='material-icons'>edit</i>Edit</button>";  // Edit button
+                                echo "<button class='button-delete' onclick=\"deleteCulture({$culture['id']})\"><i class='material-icons'>delete</i>Delete</button>";  // Delete button
+                                echo "</td>";
                                 echo "</tr>";
                             }
                         } else {
@@ -210,7 +215,7 @@ if ($meal_type_result->num_rows > 0) {
                     </div>
                     <table>
                         <tr>
-                            <th>ID</th>
+                            <!-- <th>ID</th> -->
                             <th>Meal Type</th>
                             <th>Created At</th>
                         </tr>
@@ -218,9 +223,13 @@ if ($meal_type_result->num_rows > 0) {
                         if (!empty($meal_types)) {
                             foreach ($meal_types as $type) {
                                 echo "<tr>";
-                                echo "<td>{$type['id']}</td>";
+                                // echo "<td>{$type['id']}</td>";
                                 echo "<td>{$type['meal_type']}</td>";
                                 echo "<td>{$type['created_at']}</td>";
+                                echo "<td class='Action-buttons'>";
+                                echo "<button class='button-edit' onclick=\"edittype({$type['id']})\"><i class='material-icons'>edit</i>Edit</button>";  // Edit button
+                                echo "<button class='button-delete' onclick=\"deletetype({$type['id']})\"><i class='material-icons'>delete</i>Delete</button>";  // Delete button
+                                echo "</td>";
                                 echo "</tr>";
                             }
                         } else {
@@ -240,7 +249,7 @@ if ($meal_type_result->num_rows > 0) {
 
                 <table>
                     <tr>
-                        <th>ID</th>
+                        <!-- <th>ID</th> -->
                         <th>Item Name</th>
                         <th>Description</th>
                         <th>Price</th>
@@ -254,7 +263,7 @@ if ($meal_type_result->num_rows > 0) {
                     if (!empty($menu_items)) {
                         foreach ($menu_items as $item) {
                             echo "<tr>";
-                            echo "<td>{$item['id']}</td>";
+                            // echo "<td>{$item['id']}</td>";
                             echo "<td>{$item['item_name']}</td>";
                             echo "<td>{$item['item_description']}</td>";
                             echo "<td>{$item['item_price']}</td>";
@@ -308,6 +317,29 @@ if ($meal_type_result->num_rows > 0) {
             if (confirm('Are you sure you want to delete this item?')) {
                 // Send a request to delete the item
                 window.location.href = '../Backend/delete_menu_item.php?id=' + id;
+            }
+        }
+
+        function editCulture(id) {
+            // Redirect to edit page with the culture ID
+            window.location.href = '../Backend/edit_culture.php?id=' + id;
+        }
+
+        function deleteCulture(id) {
+            if (confirm('Are you sure you want to delete this culture?')) {
+                // Redirect to delete page with the culture ID
+                window.location.href = '../Backend/delete_culture.php?id=' + id;
+            }
+        }
+        function edittype(id) {
+            // Redirect to edit page with the culture ID
+            window.location.href = '../Backend/edit_meal_type.php?id=' + id;
+        }
+
+        function deletetype(id) {
+            if (confirm('Are you sure you want to delete this type?')) {
+                // Redirect to delete page with the culture ID
+                window.location.href = '../Backend/delete_meal_type.php?id=' + id;
             }
         }
     </script>
