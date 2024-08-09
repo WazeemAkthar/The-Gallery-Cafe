@@ -12,7 +12,14 @@
 
 <body>
     <div id="adminNav"></div>
+    <button onclick="navigateToPage()" class="button-64" role="button"><span class="text">
+            <i class="fa fa-home"></i> Back to home</span></button>
     <script src="../JS/components.js"></script>
 </body>
+<script>
+    function navigateToPage() {
+        window.location.href = "Home.php";
+    }
+</script>
 
 </html>

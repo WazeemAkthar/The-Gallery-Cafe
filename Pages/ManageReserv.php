@@ -33,13 +33,15 @@ if ($conn->connect_error) {
 
 <body>
     <div id="adminNav"></div>
-    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
+    <button onclick="navigateToPage()" class="button-64" role="button"><span class="text">
+            <i class="fa fa-home"></i> Back to home</span></button>
 
 
-    <main>
+
+    <div class="container">
+        <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
         <div class="dashboard-container">
             <div class="dashboard-item">
-                <h3>Manage Reservations</h3>
                 <table id="reservations-table">
                     <thead>
                         <tr>
@@ -58,7 +60,7 @@ if ($conn->connect_error) {
                 </table>
             </div>
         </div>
-    </main>
+    </div>
 
     <div id="editForm" style="display: none;">
         <h3>Edit Reservation</h3>
@@ -117,8 +119,8 @@ if ($conn->connect_error) {
                             <td>${reservation.time}</td>
                             <td>${reservation.guests}</td>
                             <td>
-                                <button onclick="editReservation(${reservation.id})">Edit</button>
-                                <button onclick="deleteReservation(${reservation.id})">Delete</button>
+                                <button class='button-edit' onclick="editReservation(${reservation.id})"><i class='material-icons'>edit</i>Edit</button>
+                                <button class='button-delete' onclick="deleteReservation(${reservation.id})"><i class='material-icons'>delete</i>Delete</button>
                             </td>
                         `;
                         reservationsTable.appendChild(row);
@@ -186,6 +188,11 @@ if ($conn->connect_error) {
                     fetchReservations();
                 });
         });
+    </script>
+    <script>
+        function navigateToPage() {
+            window.location.href = "Home.php";
+        }
     </script>
     <script src="../JS/components.js"></script>
 </body>

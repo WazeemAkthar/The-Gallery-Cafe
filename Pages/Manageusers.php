@@ -73,11 +73,18 @@ if ($meal_type_result->num_rows > 0) {
 
 <body>
     <div id="adminNav"></div>
+    <button onclick="navigateToPage()" class="button-64" role="button"><span class="text">
+    <i class="fa fa-home"></i> Back to home</span></button>
     <div class="container">
 
         <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
 
     <script src="../JS/components.js"></script>
+    <script>
+        function navigateToPage() {
+            window.location.href = "Home.php";
+        }
+    </script>
 
 </body>
 

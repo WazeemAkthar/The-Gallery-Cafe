@@ -184,6 +184,7 @@ if ($meal_type_result->num_rows > 0) {
                             <!-- <th>ID</th> -->
                             <th>Culture Name</th>
                             <th>Created At</th>
+                            <th>Actions</th>
                         </tr>
                         <?php
                         if (!empty($food_cultures)) {
@@ -218,6 +219,7 @@ if ($meal_type_result->num_rows > 0) {
                             <!-- <th>ID</th> -->
                             <th>Meal Type</th>
                             <th>Created At</th>
+                            <th>Actions</th>
                         </tr>
                         <?php
                         if (!empty($meal_types)) {
@@ -337,7 +339,7 @@ if ($meal_type_result->num_rows > 0) {
         }
 
         function deletetype(id) {
-            if (confirm('Are you sure you want to delete this type?')) {
+            if (confirm('Are you sure you want to delete this typ?')) {
                 // Redirect to delete page with the culture ID
                 window.location.href = '../Backend/delete_meal_type.php?id=' + id;
             }

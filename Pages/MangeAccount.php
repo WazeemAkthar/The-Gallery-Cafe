@@ -32,10 +32,13 @@ $conn->close();
 
 <body>
     <div id="adminNav"></div>
-    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
+    <button onclick="navigateToPage()" class="button-64" role="button"><span class="text">
+            <i class="fa fa-home"></i> Back to home</span></button>
 
 
-    <main>
+
+    <div class="container">
+        <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
         <div class="dashboard-container">
             <div id="form1" class="form-container">
                 <h2>Create a New Account</h2>
@@ -108,7 +111,7 @@ $conn->close();
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 
     <div id="formOverlay" class="form-overlay"></div>
 
@@ -140,6 +143,11 @@ $conn->close();
                 // Send a request to delete the user
                 window.location.href = '../Backend/delete_user.php?id=' + id;
             }
+        }
+    </script>
+    <script>
+        function navigateToPage() {
+            window.location.href = "Home.php";
         }
     </script>
 </body>
