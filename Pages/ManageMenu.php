@@ -73,9 +73,12 @@ if ($meal_type_result->num_rows > 0) {
 
 <body>
     <div id="adminNav"></div>
-
-    <button onclick="navigateToPage()" class="button-64" role="button"><span class="text">
-            <i class="fa fa-home"></i> Back to home</span></button>
+    <div class="adminCheckbtn">
+        <button onclick="navigateToPage()" class="button-64" role="button"><span class="text">
+                <i class="fa fa-home"></i> Back to home</span></button>
+        <button onclick="navigateToManu()" class="button-64" role="button"><span class="text">
+                <i class="fas fa-hamburger"></i> Check Menu</span></button>
+    </div>
 
     <div class="container">
 
@@ -348,6 +351,10 @@ if ($meal_type_result->num_rows > 0) {
     <script>
         function navigateToPage() {
             window.location.href = "Home.php";
+        }
+
+        function navigateToManu() {
+            window.location.href = "Menu.php";
         }
     </script>
     <script src="../JS/components.js"></script>

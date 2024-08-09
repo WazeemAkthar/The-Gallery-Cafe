@@ -154,6 +154,11 @@ button[type="submit"]:hover {
   border-radius: 0;
 }
 
+.adminCheckbtn{
+  display: flex;
+  gap: 0;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
