@@ -18,44 +18,49 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch menu data with join
+// Prepare and execute menu query
 $menu_sql = "SELECT menu.id, menu.item_name, menu.item_description, menu.item_price, food_culture.culture_name AS item_cultures, meal_type.meal_type AS item_type, menu.item_image, menu.created_at 
              FROM menu 
              JOIN food_culture ON menu.item_cultures = food_culture.id
              JOIN meal_type ON menu.item_type = meal_type.id";
-$menu_result = $conn->query($menu_sql);
+$menu_stmt = $conn->prepare($menu_sql);
+$menu_stmt->execute();
+$menu_result = $menu_stmt->get_result();
 
-// Fetch food culture data
+// Prepare and execute food culture query
 $culture_sql = "SELECT id, culture_name, created_at FROM food_culture";
-$culture_result = $conn->query($culture_sql);
+$culture_stmt = $conn->prepare($culture_sql);
+$culture_stmt->execute();
+$culture_result = $culture_stmt->get_result();
 
-// Fetch meal type data
+// Prepare and execute meal type query
 $meal_type_sql = "SELECT id, meal_type, created_at FROM meal_type";
-$meal_type_result = $conn->query($meal_type_sql);
+$meal_type_stmt = $conn->prepare($meal_type_sql);
+$meal_type_stmt->execute();
+$meal_type_result = $meal_type_stmt->get_result();
 
 $menu_items = [];
 $food_cultures = [];
 $meal_types = [];
 
-if ($menu_result->num_rows > 0) {
-  while ($row = $menu_result->fetch_assoc()) {
-    $menu_items[] = $row;
-  }
+while ($row = $menu_result->fetch_assoc()) {
+  $menu_items[] = $row;
 }
 
-if ($culture_result->num_rows > 0) {
-  while ($row = $culture_result->fetch_assoc()) {
-    $food_cultures[] = $row;
-  }
+while ($row = $culture_result->fetch_assoc()) {
+  $food_cultures[] = $row;
 }
 
-if ($meal_type_result->num_rows > 0) {
-  while ($row = $meal_type_result->fetch_assoc()) {
-    $meal_types[] = $row;
-  }
+while ($row = $meal_type_result->fetch_assoc()) {
+  $meal_types[] = $row;
 }
 
+$menu_stmt->close();
+$culture_stmt->close();
+$meal_type_stmt->close();
+$conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

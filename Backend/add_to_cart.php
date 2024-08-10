@@ -1,44 +1,46 @@
 <?php
 session_start();
 
-$servername = "localhost";
-$username = "root"; // or your database username
-$password = ""; // or your database password
-$dbname = "thegallerycafe";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $itemId = $_POST['id'];
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+    // Assume you have a function `getMenuItemById` to fetch the item details from the database
+    $item = getMenuItemById($itemId);
 
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $item_id = intval($_POST['id']);
-    
-    // Fetch the item details from the database
-    $sql = "SELECT * FROM menu WHERE id = $item_id";
-    $result = $conn->query($sql);
-    
-    if ($result->num_rows > 0) {
-        $item = $result->fetch_assoc();
-        
-        // Initialize cart if not set
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = [];
-        }
-        
-        // Add item to cart
-        $_SESSION['cart'][$item_id] = $item;
-        
-        echo "Item added to cart!";
-    } else {
-        echo "Item not found.";
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
     }
-} else {
-    echo "Invalid request.";
+
+    // Add the item to the cart
+    $_SESSION['cart'][$itemId] = $item;
+
+    echo "Item added to cart.";
 }
 
-$conn->close();
+function getMenuItemById($id) {
+    // Your database connection
+    $servername = "localhost";
+    $username = "root"; // or your database username
+    $password = ""; // or your database password
+    $dbname = "thegallerycafe";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT id, item_name, item_price, item_image FROM menu WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $item = $result->fetch_assoc();
+
+    $stmt->close();
+    $conn->close();
+
+    return $item;
+}
 ?>

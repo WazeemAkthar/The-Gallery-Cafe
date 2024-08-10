@@ -248,6 +248,66 @@ if ($meal_type_result->num_rows > 0) {
         .menu-card:hover .details-overlay {
             bottom: 0;
         }
+
+        /* Overlay for background blur */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Buttons in Modal */
+        .modal-buttons {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 20px;
+        }
+
+        .process-btn,
+        .cancel-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .process-btn {
+            background-color: #28a745;
+        }
+
+        .cancel-btn {
+            background-color: #dc3545;
+        }
+
+        .process-btn:hover {
+            background-color: #218838;
+        }
+
+        .cancel-btn:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 
@@ -307,19 +367,20 @@ if ($meal_type_result->num_rows > 0) {
             <?php endforeach; ?>
         </div>
 
-        <div class="menu-card" data-culture="<?php echo $item['item_cultures']; ?>"
-            data-meal-type="<?php echo $item['item_type']; ?>">
-            <img src="<?php echo $item['item_image']; ?>" alt="<?php echo $item['item_name']; ?>">
-            <div class="details-overlay">
-                <h3><?php echo $item['item_name']; ?></h3>
-                <p><?php echo $item['item_description']; ?></p>
-                <p>Rs.<?php echo $item['item_price']; ?></p>
-                <p><?php echo $item['item_cultures']; ?></p>
-                <div class="buttons">
-                    <button class="order-btn" onclick="buyItem(<?php echo $item['id']; ?>)">Order Now</button>
-                    <button class="Add-btn" onclick="addToCart(<?php echo $item['id']; ?>)"><i
-                            class="fas fa-shopping-cart"></i>Add to Cart</button>
-                </div>
+        <!-- Order Modal -->
+        <div id="orderModal" class="modal">
+            <div class="modal-content">
+                <h2>Order Item</h2>
+                <p>How many items would you like to order?</p>
+                <form id="orderForm" action="../Backend/process_buy.php" method="GET">
+                    <input type="hidden" name="id" id="itemIdInput">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="count" value="1" min="1" required>
+                    <div class="modal-buttons">
+                        <button type="submit" class="process-btn">Process to Pay</button>
+                        <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -399,6 +460,29 @@ if ($meal_type_result->num_rows > 0) {
             };
             xhr.send();
         }
+
+        function buyItem(id) {
+            <?php if (!isset($_SESSION['user_id'])): ?>
+                window.location.href = 'login.html';
+            <?php else: ?>
+                // Display the modal with item ID pre-filled
+                document.getElementById('itemIdInput').value = id;
+                document.getElementById('orderModal').style.display = 'flex';
+            <?php endif; ?>
+        }
+
+        function closeModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        // Close the modal if the user clicks outside of it
+        window.onclick = function (event) {
+            const modal = document.getElementById('orderModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+
     </script>
     <script src="../JS/components.js"></script>
 </body>
