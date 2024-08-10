@@ -177,19 +177,19 @@ $currentTime = date('H:i');
             <div class="form-reserv">
                 <div>
                     <div class="input-container ic1">
-                        <input id="name" class="input" type="text" placeholder=" " name="name" />
+                        <input id="name" class="input" type="text" placeholder=" " name="name" required />
                         <div class="cut"></div>
                         <label for="tname" class="placeholder">Name</label>
                     </div>
 
                     <div class="input-container ic2">
-                        <input id="email" class="input" type="text" placeholder=" " name="email" />
+                        <input id="email" class="input" type="text" placeholder=" " name="email" required />
                         <div class="cut cut-short"></div>
                         <label for="email" class="placeholder">Email</label>
                     </div>
 
                     <div class="input-container ic2">
-                        <input id="phone" class="input" type="tel" placeholder=" " name="phone" />
+                        <input id="phone" class="input" type="tel" placeholder=" " name="phone" required />
                         <div class="cut"></div>
                         <label for="phone" class="placeholder">phone</label>
                     </div>
@@ -198,18 +198,18 @@ $currentTime = date('H:i');
                 <div>
                     <div class="input-container ic1">
                         <input id="date" class="input" type="date" placeholder=" " name="date"
-                            value="<?php echo $currentDate; ?>" />
+                            value="<?php echo $currentDate; ?>" required />
                         <div class="cut"></div>
                         <label for="date" class="placeholder">date</label>
                     </div>
                     <div class="input-container ic2">
                         <input id="time" class="input" type="time" placeholder=" " name="time"
-                            value="<?php echo $currentTime; ?>" />
+                            value="<?php echo $currentTime; ?>" required />
                         <div class="cut"></div>
                         <label for="time" class="placeholder">Time</label>
                     </div>
                     <div class="input-container ic2">
-                        <input id="guests" class="input" type="number" name="guests" placeholder=" " />
+                        <input id="guests" class="input" type="number" name="guests" placeholder=" " required />
                         <div class="cut cut-short"></div>
                         <label for="guests" class="placeholder">Guests</label>
                     </div>
