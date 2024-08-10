@@ -18,49 +18,44 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// Prepare and execute menu query
+// Fetch menu data with join
 $menu_sql = "SELECT menu.id, menu.item_name, menu.item_description, menu.item_price, food_culture.culture_name AS item_cultures, meal_type.meal_type AS item_type, menu.item_image, menu.created_at 
              FROM menu 
              JOIN food_culture ON menu.item_cultures = food_culture.id
              JOIN meal_type ON menu.item_type = meal_type.id";
-$menu_stmt = $conn->prepare($menu_sql);
-$menu_stmt->execute();
-$menu_result = $menu_stmt->get_result();
+$menu_result = $conn->query($menu_sql);
 
-// Prepare and execute food culture query
+// Fetch food culture data
 $culture_sql = "SELECT id, culture_name, created_at FROM food_culture";
-$culture_stmt = $conn->prepare($culture_sql);
-$culture_stmt->execute();
-$culture_result = $culture_stmt->get_result();
+$culture_result = $conn->query($culture_sql);
 
-// Prepare and execute meal type query
+// Fetch meal type data
 $meal_type_sql = "SELECT id, meal_type, created_at FROM meal_type";
-$meal_type_stmt = $conn->prepare($meal_type_sql);
-$meal_type_stmt->execute();
-$meal_type_result = $meal_type_stmt->get_result();
+$meal_type_result = $conn->query($meal_type_sql);
 
 $menu_items = [];
 $food_cultures = [];
 $meal_types = [];
 
-while ($row = $menu_result->fetch_assoc()) {
-  $menu_items[] = $row;
+if ($menu_result->num_rows > 0) {
+  while ($row = $menu_result->fetch_assoc()) {
+    $menu_items[] = $row;
+  }
 }
 
-while ($row = $culture_result->fetch_assoc()) {
-  $food_cultures[] = $row;
+if ($culture_result->num_rows > 0) {
+  while ($row = $culture_result->fetch_assoc()) {
+    $food_cultures[] = $row;
+  }
 }
 
-while ($row = $meal_type_result->fetch_assoc()) {
-  $meal_types[] = $row;
+if ($meal_type_result->num_rows > 0) {
+  while ($row = $meal_type_result->fetch_assoc()) {
+    $meal_types[] = $row;
+  }
 }
 
-$menu_stmt->close();
-$culture_stmt->close();
-$meal_type_stmt->close();
-$conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -136,7 +131,6 @@ $conn->close();
 
     .meal-type-group {
       display: flex;
-      flex-wrap: wrap;
       margin-bottom: 20px;
     }
 
@@ -254,6 +248,66 @@ $conn->close();
     .menu-card:hover .details-overlay {
       bottom: 0;
     }
+
+    /* Overlay for background blur */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Modal Content */
+    .modal-content {
+      background-color: white;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Buttons in Modal */
+    .modal-buttons {
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 20px;
+    }
+
+    .process-btn,
+    .cancel-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .process-btn {
+      background-color: #28a745;
+    }
+
+    .cancel-btn {
+      background-color: #dc3545;
+    }
+
+    .process-btn:hover {
+      background-color: #218838;
+    }
+
+    .cancel-btn:hover {
+      background-color: #c82333;
+    }
   </style>
 </head>
 
@@ -311,6 +365,23 @@ $conn->close();
           <?php endforeach; ?>
         </div>
       <?php endforeach; ?>
+    </div>
+
+    <!-- Order Modal -->
+    <div id="orderModal" class="modal">
+      <div class="modal-content">
+        <h2>Order Item</h2>
+        <p>How many items would you like to order?</p>
+        <form id="orderForm" action="../Backend/process_buy.php" method="GET">
+          <input type="hidden" name="id" id="itemIdInput">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" name="count" value="1" min="1" required>
+          <div class="modal-buttons">
+            <button type="submit" class="process-btn">Process to Pay</button>
+            <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+          </div>
+        </form>
+      </div>
     </div>
 
 
@@ -389,6 +460,29 @@ $conn->close();
       };
       xhr.send();
     }
+
+    function buyItem(id) {
+      <?php if (!isset($_SESSION['user_id'])): ?>
+        window.location.href = 'login.html';
+      <?php else: ?>
+        // Display the modal with item ID pre-filled
+        document.getElementById('itemIdInput').value = id;
+        document.getElementById('orderModal').style.display = 'flex';
+      <?php endif; ?>
+    }
+
+    function closeModal() {
+      document.getElementById('orderModal').style.display = 'none';
+    }
+
+    // Close the modal if the user clicks outside of it
+    window.onclick = function (event) {
+      const modal = document.getElementById('orderModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
+
   </script>
   <script src="../JS/components.js"></script>
 </body>
