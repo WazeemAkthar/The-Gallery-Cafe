@@ -1,9 +1,13 @@
 <?php
 session_start();
-if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
+if (!isset($_SESSION['role_id'])) {
     header("Location: login.html");
     exit();
 }
+
+// Define role IDs for staff and admin
+$staffRoleId = 2; // Example: 2 = Staff
+$adminRoleId = 3; // Example: 1 = Admin
 
 $servername = "localhost";
 $username = "root"; // or your database username
@@ -32,7 +36,18 @@ if ($conn->connect_error) {
 </head>
 
 <body>
-    <div id="adminNav"></div>
+    <!-- <div id="adminNav"></div> -->
+    <?php if ($_SESSION['role_id'] == $staffRoleId): ?>
+        <!-- Display staff header if the user is a staff member -->
+        <div id="staffheader"></div>
+    <?php elseif ($_SESSION['role_id'] == $adminRoleId): ?>
+        <!-- Display admin navbar if the user is an admin -->
+        <div id="adminNav"></div>
+    <?php else: ?>
+        <!-- Display a default navbar or message if the user is neither staff nor admin -->
+        <div id="defaultNav">You are not authorized to view this content.</div>
+    <?php endif; ?>
+
     <button onclick="navigateToPage()" class="button-64" role="button"><span class="text">
             <i class="fa fa-home"></i> Back to home</span></button>
 

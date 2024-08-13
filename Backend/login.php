@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($role_id == 3) {
                 header("Location: ../Pages/ManageMenu.php");
             } elseif ($role_id == 2) {
-                header("Location: ../Pages/operational-staff.php");
+                header("Location: ../Pages/ManageReserv.php");
             } else {
                 header("Location: ../Pages/home.php");
             }

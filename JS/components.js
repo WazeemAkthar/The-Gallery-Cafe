@@ -56,4 +56,5 @@ document.addEventListener("DOMContentLoaded", function () {
     "adminNav",
     "../css/adminNav.css"
   );
+  loadComponent("../Components/staffheader.html", "staffheader", "../css/adminNav.css");
 });
