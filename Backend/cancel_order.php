@@ -1,9 +1,9 @@
 <?php
 session_start();
-// if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
-//     header("Location: login.html");
-//     exit();
-// }
+if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
+    header("Location: login.html");
+    exit();
+}
 
 $servername = "localhost";
 $username = "root";
