@@ -48,9 +48,12 @@ if ($conn->connect_error) {
         <div id="defaultNav">You are not authorized to view this content.</div>
     <?php endif; ?>
 
-    <button onclick="navigateToPage()" class="button-64" role="button"><span class="text">
-            <i class="fa fa-home"></i> Back to home</span></button>
-
+    <div class="adminCheckbtn">
+        <button onclick="navigateToPage()" class="button-64" role="button"><span class="text">
+                <i class="fa fa-home"></i> Back to home</span></button>
+        <button onclick="logout()" class="button-64" role="button"><span class="text">
+                Logout <i class="fa fa-sign-out"></i></span></button>
+    </div>
 
 
     <div class="container">
@@ -207,6 +210,9 @@ if ($conn->connect_error) {
     <script>
         function navigateToPage() {
             window.location.href = "Home.php";
+        }
+        function logout() {
+            window.location.href = "../Backend/logout.php";
         }
     </script>
     <script src="../JS/components.js"></script>

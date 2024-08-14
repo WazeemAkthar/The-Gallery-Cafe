@@ -32,10 +32,12 @@ $conn->close();
 
 <body>
     <div id="adminNav"></div>
-    <button onclick="navigateToPage()" class="button-64" role="button"><span class="text">
-            <i class="fa fa-home"></i> Back to home</span></button>
-
-
+    <div class="adminCheckbtn">
+        <button onclick="navigateToPage()" class="button-64" role="button"><span class="text">
+                <i class="fa fa-home"></i> Back to home</span></button>
+        <button onclick="logout()" class="button-64" role="button"><span class="text">
+                Logout <i class="fa fa-sign-out"></i></span></button>
+    </div>
 
     <div class="container">
         <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
@@ -148,6 +150,9 @@ $conn->close();
     <script>
         function navigateToPage() {
             window.location.href = "Home.php";
+        }
+        function logout() {
+            window.location.href = "../Backend/logout.php";
         }
     </script>
 </body>

@@ -95,6 +95,8 @@ if ($meal_type_result->num_rows > 0) {
                 <i class="fa fa-home"></i> Back to home</span></button>
         <button onclick="navigateToManu()" class="button-64" role="button"><span class="text">
                 <i class="fas fa-hamburger"></i> Check Menu</span></button>
+        <button onclick="logout()" class="button-64" role="button"><span class="text">
+                Logout <i class="fa fa-sign-out"></i></span></button>
     </div>
 
     <div class="container">
@@ -372,6 +374,9 @@ if ($meal_type_result->num_rows > 0) {
 
         function navigateToManu() {
             window.location.href = "Menu.php";
+        }
+        function logout() {
+            window.location.href = "../Backend/logout.php";
         }
     </script>
     <script src="../JS/components.js"></script>
