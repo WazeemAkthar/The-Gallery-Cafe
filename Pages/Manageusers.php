@@ -10,9 +10,10 @@ $staffRoleId = 2; // Example: 2 = Staff
 $adminRoleId = 3; // Example: 1 = Admin
 
 
+// Database connection details
 $servername = "localhost";
-$username = "root"; // or your database username
-$password = ""; // or your database password
+$username = "root";
+$password = "";
 $dbname = "thegallerycafe";
 
 // Create connection
@@ -23,42 +24,23 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch menu data with join
-$menu_sql = "SELECT menu.id, menu.item_name, menu.item_description, menu.item_price, 
-                    food_culture.culture_name AS item_cultures, meal_type.meal_type AS item_type, 
-                    menu.item_image, menu.created_at 
-             FROM menu 
-             JOIN food_culture ON menu.item_cultures = food_culture.id 
-             JOIN meal_type ON menu.item_type = meal_type.id";
-$menu_result = $conn->query($menu_sql);
+// Fetch all user data
+$sql = "SELECT users.id, users.name, users.email, roles.role_name 
+        FROM users 
+        JOIN roles ON users.role_id = roles.id";
+$result = $conn->query($sql);
 
-// Fetch food culture data
-$culture_sql = "SELECT id, culture_name, created_at FROM food_culture";
-$culture_result = $conn->query($culture_sql);
-
-// Fetch meal type data
-$meal_type_sql = "SELECT id, meal_type, created_at FROM meal_type";
-$meal_type_result = $conn->query($meal_type_sql);
-
-$menu_items = [];
-$food_cultures = [];
-$meal_types = [];
-
-if ($menu_result->num_rows > 0) {
-    while ($row = $menu_result->fetch_assoc()) {
-        $menu_items[] = $row;
-    }
-}
-
-if ($culture_result->num_rows > 0) {
-    while ($row = $culture_result->fetch_assoc()) {
-        $food_cultures[] = $row;
-    }
-}
-
-if ($meal_type_result->num_rows > 0) {
-    while ($row = $meal_type_result->fetch_assoc()) {
-        $meal_types[] = $row;
+function getRoleColor($role)
+{
+    switch (strtolower($role)) {
+        case 'admin':
+            return '#28a745'; // Green for Admin
+        case 'staff':
+            return '#007bff'; // Blue for Staff
+        case 'customer':
+            return '#ffc107'; // Yellow for Customer
+        default:
+            return '#6c757d'; // Gray for other roles
     }
 }
 ?>
@@ -74,6 +56,88 @@ if ($meal_type_result->num_rows > 0) {
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="../CSS/Admin_Dashboard.css">
 </head>
+<style>
+    .container {
+        width: 80%;
+        margin: 20px auto;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #eaeaea;
+    }
+
+    .no-data {
+        text-align: center;
+        color: #777;
+        padding: 20px;
+    }
+
+    .legend {
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .legend span {
+        display: inline-block;
+        margin-right: 10px;
+        padding: 5px 10px;
+        border-radius: 4px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .role-admin {
+        background-color: #28a745;
+    }
+
+    .role-staff {
+        background-color: #007bff;
+    }
+
+    .role-customer {
+        background-color: #ffc107;
+        color: #333;
+        /* Darker text color for better contrast */
+    }
+
+    .role-other {
+        background-color: #6c757d;
+    }
+</style>
 
 <body>
     <!-- <div id="adminNav"></div> -->
@@ -90,16 +154,51 @@ if ($meal_type_result->num_rows > 0) {
 
     <button onclick="navigateToPage()" class="button-64" role="button"><span class="text">
             <i class="fa fa-home"></i> Back to home</span></button>
+
+    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
+
     <div class="container">
+        <h1>User Data</h1>
 
-        <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
+        <!-- Legend Section -->
+        <div class="legend">
+            <span class="role-admin">Admin</span>
+            <span class="role-staff">Staff</span>
+            <span class="role-other">user</span>
+        </div>
 
-        <script src="../JS/components.js"></script>
-        <script>
-            function navigateToPage() {
-                window.location.href = "Home.php";
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+            <?php
+            if ($result->num_rows > 0) {
+                // Output data of each row
+                while ($row = $result->fetch_assoc()) {
+                    $roleColor = getRoleColor($row['role_name']);
+                    echo "<tr>";
+                    echo "<td>{$row['id']}</td>";
+                    echo "<td>{$row['name']}</td>";
+                    echo "<td>{$row['email']}</td>";
+                    echo "<td class='role' style='background-color:{$roleColor}; color: white;'>{$row['role_name']}</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='4' class='no-data'>No users found</td></tr>";
             }
-        </script>
+            ?>
+        </table>
+    </div>
+
+    <script src="../JS/components.js"></script>
+    <script>
+        function navigateToPage() {
+            window.location.href = "Home.php";
+        }
+    </script>
 
 </body>
 
