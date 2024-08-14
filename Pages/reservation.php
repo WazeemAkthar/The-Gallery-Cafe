@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION['role_id'])) {
-    header("Location: login.html");
-    exit();
-}
 
 // Set the timezone
 date_default_timezone_set('America/New_York');
