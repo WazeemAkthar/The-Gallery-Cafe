@@ -82,3 +82,6 @@ CREATE TABLE orders (
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (item_id) REFERENCES menu(id)
 );
+
+--order status--
+ALTER TABLE orders ADD COLUMN status ENUM('pending', 'confirmed', 'canceled') DEFAULT 'pending';
