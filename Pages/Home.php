@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION['role_id'])) {
-  header("Location: login.html");
-  exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -22,12 +18,19 @@ if (!isset($_SESSION['role_id'])) {
 
   <section id="home" class="hero"></section>
   <div class="hero-content">
-    <h1>Welcome to The Gallery Café <?php echo $_SESSION['name']; ?></h1>
-    <h2>Discover Our Delicious Menu</h2>
-    <p>
-      Experience the best dining in Colombo with our diverse cuisine options.
-    </p>
-    <a href="../Pages/Menu.php" class="btn">Explore Our Menu</a>
+    <h1>Welcome to The Gallery Café
+      <?php
+      if (isset($_SESSION['name'])) {
+        echo $_SESSION['name'];
+      } else {
+        echo "Guest";
+      }
+      ?>
+      <h2>Discover Our Delicious Menu</h2>
+      <p>
+        Experience the best dining in Colombo with our diverse cuisine options.
+      </p>
+      <a href="../Pages/Menu.php" class="btn">Explore Our Menu</a>
   </div>
 
   <section id="specials">
