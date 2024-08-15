@@ -34,7 +34,7 @@ if (isset($_GET['id']))
         $stmt->bind_param("iii", $user_id, $item_id, $user_count);
       
         if ($stmt->execute()) {
-          echo "Order placed successfully!";
+          header("Location: ../pages/orderSuccess.html");
         } else {
           echo "Failed to place order.";
         }

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Successful!</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f8ff;
+        font-family: "Arial", sans-serif;
+      }
+
+      .success-container {
+        text-align: center;
+        animation: fadeIn 2s ease;
+      }
+
+      h1 {
+        font-size: 3rem;
+        color: #28a745;
+        opacity: 0;
+        animation: slideDown 1s forwards 1.5s;
+      }
+
+      .checkmark {
+        font-size: 5rem;
+        color: #28a745;
+        opacity: 0;
+        animation: popIn 1s forwards 0.5s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes popIn {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+
+        50% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes slideDown {
+        0% {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .continue-btn {
+        margin-top: 30px;
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        border-radius: 5px;
+        opacity: 0;
+        animation: fadeIn 1s forwards 3s;
+      }
+
+      .continue-btn:hover {
+        background-color: #218838;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="success-container">
+      <div class="checkmark">✔</div>
+      <h1>Order Successful!</h1>
+      <button class="continue-btn" onclick="goHome()">Continue Shopping</button>
+    </div>
+
+    <script>
+      function goHome() {
+        window.location.href = "Menu.php"; // Redirect to your homepage or other desired page
+      }
+    </script>
+  </body>
+</html>

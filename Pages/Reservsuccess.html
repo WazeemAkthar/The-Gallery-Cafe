@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Successful!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .success-container {
+            text-align: center;
+            animation: fadeIn 2s ease;
+        }
+
+        .checkmark-container {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #28a745;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: popIn 1s forwards 0.5s;
+        }
+
+        .checkmark {
+            font-size: 3rem;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-top: 20px;
+            opacity: 0;
+            animation: slideDown 1s forwards 1.5s;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeInText 1s forwards 2s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideDown {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInText {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .continue-btn {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+            opacity: 0;
+            animation: fadeIn 1s forwards 2.5s;
+        }
+
+        .continue-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="success-container">
+        <div class="checkmark-container">
+            <span class="checkmark">✔</span>
+        </div>
+        <h1>Reservation Successful!</h1>
+        <p>We look forward to serving you. See you soon!</p>
+        <button class="continue-btn" onclick="goHome()">Back to Home</button>
+    </div>
+
+    <script>
+        function goHome() {
+            window.location.href = "reservation.php";
+        }
+    </script>
+</body>
+
+</html>

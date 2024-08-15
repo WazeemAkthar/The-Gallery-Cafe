@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssssis", $name, $email, $phone, $date, $time, $guests, $message);
 
     if ($stmt->execute()) {
-        echo "Reservation made successfully!";
+        header("Location: ../pages/Reservsuccess.html");
     } else {
         echo "Error: " . $stmt->error;
     }
