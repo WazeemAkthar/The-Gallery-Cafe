@@ -129,12 +129,16 @@
         </div>
         <h1>Reservation Successful!</h1>
         <p>We look forward to serving you. See you soon!</p>
+        <button class="continue-btn" onclick="goreservationpage()">Make another Reservation</button>
         <button class="continue-btn" onclick="goHome()">Back to Home</button>
     </div>
 
     <script>
-        function goHome() {
+        function goreservationpage() {
             window.location.href = "reservation.php";
+        }
+        function goHome() {
+            window.location.href = "Home.php";
         }
     </script>
 </body>
