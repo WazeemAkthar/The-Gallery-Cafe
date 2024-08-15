@@ -1,36 +1,27 @@
 <?php
-// Database connection details
+session_start();
+
+// Redirect to login if the user is not logged in
+if (!isset($_SESSION['role_id'])) {
+    header("Location: login.html");
+    exit();
+}
+
+// Define role IDs for staff and admin
+$staffRoleId = 2; // Example: 2 = Staff
+$adminRoleId = 3; // Example: 1 = Admin
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "thegallerycafe";
 
-// Create connection
+// Create a connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
+// Check the connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-}
-
-// Fetch all user data
-$sql = "SELECT users.id, users.name, users.email, roles.role_name 
-        FROM users 
-        JOIN roles ON users.role_id = roles.id";
-$result = $conn->query($sql);
-
-function getRoleColor($role)
-{
-    switch (strtolower($role)) {
-        case 'admin':
-            return '#28a745'; // Green for Admin
-        case 'staff':
-            return '#007bff'; // Blue for Staff
-        case 'customer':
-            return '#ffc107'; // Yellow for Customer
-        default:
-            return '#6c757d'; // Gray for other roles
-    }
 }
 ?>
 
@@ -40,150 +31,205 @@ function getRoleColor($role)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Data</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        .legend {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .legend span {
-            display: inline-block;
-            margin-right: 10px;
-            padding: 5px 10px;
-            border-radius: 4px;
-            color: white;
-            font-weight: bold;
-        }
-
-        .role-admin {
-            background-color: #28a745;
-        }
-
-        .role-staff {
-            background-color: #007bff;
-        }
-
-        .role-customer {
-            background-color: #ffc107;
-            color: #333;
-            /* Darker text color for better contrast */
-        }
-
-        .role-other {
-            background-color: #6c757d;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th,
-        td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #007bff;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #eaeaea;
-        }
-
-        .role {
-            font-weight: bold;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-        }
-
-        .no-data {
-            text-align: center;
-            color: #777;
-            padding: 20px;
-        }
-    </style>
+    <title>Admin Dashboard - The Gallery Café</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../CSS/Admin_Dashboard.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>User Data</h1>
+    <!-- Display the appropriate header or navbar based on the user's role -->
+    <?php if ($_SESSION['role_id'] == $staffRoleId): ?>
+        <div id="staffheader"></div>
+    <?php elseif ($_SESSION['role_id'] == $adminRoleId): ?>
+        <div id="adminNav"></div>
+    <?php else: ?>
+        <div id="defaultNav">You are not authorized to view this content.</div>
+    <?php endif; ?>
 
-        <!-- Legend Section -->
-        <div class="legend">
-            <span class="role-admin">Admin</span>
-            <span class="role-staff">Staff</span>
-            <span class="role-other">user</span>
-        </div>
-
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-            </tr>
-            <?php
-            if ($result->num_rows > 0) {
-                // Output data of each row
-                while ($row = $result->fetch_assoc()) {
-                    $roleColor = getRoleColor($row['role_name']);
-                    echo "<tr>";
-                    echo "<td>{$row['id']}</td>";
-                    echo "<td>{$row['name']}</td>";
-                    echo "<td>{$row['email']}</td>";
-                    echo "<td class='role' style='background-color:{$roleColor};'>{$row['role_name']}</td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='4' class='no-data'>No users found</td></tr>";
-            }
-            ?>
-        </table>
+    <div class="adminCheckbtn">
+        <button onclick="navigateToPage()" class="button-64" role="button">
+            <span class="text"><i class="fa fa-home"></i> Back to home</span>
+        </button>
+        <button onclick="logout()" class="button-64" role="button">
+            <span class="text">Logout <i class="fa fa-sign-out"></i></span>
+        </button>
     </div>
+
+    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?> (<?php echo htmlspecialchars($_SESSION['role_name']); ?>)</h1>
+
+
+    <!-- Main container for admin or staff -->
+    <div class="container">
+        <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?></h1>
+        <div class="dashboard-container">
+            <?php if ($_SESSION['role_id'] == $adminRoleId): ?>
+                <!-- Display content only for admins -->
+                <div class="dashboard-item">
+                    <table id="reservations-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Guests</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Reservation rows will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            <?php elseif ($_SESSION['role_id'] == $staffRoleId): ?>
+                <!-- Display content specific to staff -->
+                <p>Welcome to the staff dashboard!</p>
+                <!-- Staff-specific table or functionality can go here -->
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div id="editForm" style="display: none;">
+        <h3>Edit Reservation</h3>
+        <form id="reservationEditForm">
+            <input type="hidden" id="editId">
+            <div class="form-group">
+                <label for="editName">Name:</label>
+                <input type="text" id="editName" name="editName" required>
+            </div>
+            <div class="form-group">
+                <label for="editEmail">Email:</label>
+                <input type="email" id="editEmail" name="editEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="editPhone">Phone Number:</label>
+                <input type="tel" id="editPhone" name="editPhone" required>
+            </div>
+            <div class="form-group">
+                <label for="editDate">Date:</label>
+                <input type="date" id="editDate" name="editDate" required>
+            </div>
+            <div class="form-group">
+                <label for="editTime">Time:</label>
+                <input type="time" id="editTime" name="editTime" required>
+            </div>
+            <div class="form-group">
+                <label for="editGuests">Number of Guests:</label>
+                <input type="number" id="editGuests" name="editGuests" min="1" max="8" required>
+            </div>
+            <div class="form-group">
+                <label for="editMessage">Special Requests:</label>
+                <textarea id="editMessage" name="editMessage" rows="4"></textarea>
+            </div>
+            <button type="submit">Update Reservation</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchReservations();
+        });
+
+        function fetchReservations() {
+            fetch('../Backend/fetch_reservations.php')
+                .then(response => response.json())
+                .then(data => {
+                    const reservationsTable = document.querySelector('#reservations-table tbody');
+                    reservationsTable.innerHTML = '';
+                    data.forEach(reservation => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${reservation.name}</td>
+                            <td>${reservation.email}</td>
+                            <td>${reservation.phone}</td>
+                            <td>${reservation.date}</td>
+                            <td>${reservation.time}</td>
+                            <td>${reservation.guests}</td>
+                            <td>
+                                <button class='button-edit' onclick="editReservation(${reservation.id})">
+                                    <i class='material-icons'>edit</i>Edit
+                                </button>
+                                <button class='button-delete' onclick="deleteReservation(${reservation.id})">
+                                    <i class='material-icons'>delete</i>Delete
+                                </button>
+                            </td>
+                        `;
+                        reservationsTable.appendChild(row);
+                    });
+                });
+        }
+
+        function deleteReservation(id) {
+            if (confirm('Are you sure you want to delete this reservation?')) {
+                fetch('../Backend/delete_reservation.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `id=${id}`
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        alert(data);
+                        fetchReservations();
+                    });
+            }
+        }
+
+        function editReservation(id) {
+            fetch(`../Backend/fetch_single_reservation.php?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelector('#editId').value = data.id;
+                    document.querySelector('#editName').value = data.name;
+                    document.querySelector('#editEmail').value = data.email;
+                    document.querySelector('#editPhone').value = data.phone;
+                    document.querySelector('#editDate').value = data.date;
+                    document.querySelector('#editTime').value = data.time;
+                    document.querySelector('#editGuests').value = data.guests;
+                    document.querySelector('#editMessage').value = data.message;
+                    document.querySelector('#editForm').style.display = 'block';
+                });
+        }
+
+        document.querySelector('#reservationEditForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const id = document.querySelector('#editId').value;
+            const name = document.querySelector('#editName').value;
+            const email = document.querySelector('#editEmail').value;
+            const phone = document.querySelector('#editPhone').value;
+            const date = document.querySelector('#editDate').value;
+            const time = document.querySelector('#editTime').value;
+            const guests = document.querySelector('#editGuests').value;
+            const message = document.querySelector('#editMessage').value;
+
+            fetch('../Backend/update_reservation.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `id=${id}&name=${name}&email=${email}&phone=${phone}&date=${date}&time=${time}&guests=${guests}&message=${message}`
+            })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    document.querySelector('#editForm').style.display = 'none';
+                    fetchReservations();
+                });
+        });
+
+        function navigateToPage() {
+            window.location.href = "Home.php";
+        }
+
+        function logout() {
+            window.location.href = "../Backend/logout.php";
+        }
+    </script>
+    <script src="../JS/components.js"></script>
 </body>
 
 </html>
-
-<?php
-// Close the connection
-$conn->close();
-?>

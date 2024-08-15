@@ -159,8 +159,9 @@ function getRoleColor($role)
                 Logout <i class="fa fa-sign-out"></i></span></button>
     </div>
 
-    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
-
+    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>
+    (<?php echo htmlspecialchars($_SESSION['role_name']); ?>)</h1>
+    
     <div class="container">
         <h1>User Data</h1>
 

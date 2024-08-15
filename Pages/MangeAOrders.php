@@ -106,6 +106,9 @@ if ($result->num_rows > 0) {
                 Logout <i class="fa fa-sign-out"></i></span></button>
     </div>
 
+    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>
+    (<?php echo htmlspecialchars($_SESSION['role_name']); ?>)</h1>
+
     <h1>Orders Management</h1>
     <table>
         <tr>

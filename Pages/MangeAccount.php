@@ -40,7 +40,8 @@ $conn->close();
     </div>
 
     <div class="container">
-        <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
+    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>
+    (<?php echo htmlspecialchars($_SESSION['role_name']); ?>)</h1>
         <div class="dashboard-container">
             <div id="form1" class="form-container">
                 <h2>Create a New Account</h2>

@@ -95,13 +95,16 @@ if ($meal_type_result->num_rows > 0) {
                 <i class="fa fa-home"></i> Back to home</span></button>
         <button onclick="navigateToManu()" class="button-64" role="button"><span class="text">
                 <i class="fas fa-hamburger"></i> Check Menu</span></button>
+
         <button onclick="logout()" class="button-64" role="button"><span class="text">
                 Logout <i class="fa fa-sign-out"></i></span></button>
     </div>
 
     <div class="container">
 
-        <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
+        <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>
+            (<?php echo htmlspecialchars($_SESSION['role_name']); ?>)</h1>
+
 
         <!----------------------------------------------- Manage Menu Foods and Drinks ----------------------------------------------->
         <div id="dashboard2">

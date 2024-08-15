@@ -162,6 +162,8 @@ function getStatusColor($status)
     </div>
 
     <div class="container">
+        <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>
+            (<?php echo htmlspecialchars($_SESSION['role_name']); ?>)</h1>
         <h1>Order Status</h1>
         <table>
             <tr>

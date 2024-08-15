@@ -57,7 +57,8 @@ if ($conn->connect_error) {
 
 
     <div class="container">
-        <h1>Welcome, Admin <?php echo $_SESSION['name']; ?></h1>
+    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>
+    (<?php echo htmlspecialchars($_SESSION['role_name']); ?>)</h1>
         <div class="dashboard-container">
             <div class="dashboard-item">
                 <table id="reservations-table">
