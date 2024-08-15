@@ -9,17 +9,30 @@ require_once 'db.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "DELETE FROM users WHERE id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
 
-    if ($stmt->execute()) {
-        header("Location: ../Pages/MangeAccount.php");
+    // First, delete related records from the orders table
+    $sqlOrders = "DELETE FROM orders WHERE user_id = ?";
+    $stmtOrders = $conn->prepare($sqlOrders);
+    $stmtOrders->bind_param("i", $id);
+
+    if ($stmtOrders->execute()) {
+        // Now delete the user
+        $sqlUser = "DELETE FROM users WHERE id = ?";
+        $stmtUser = $conn->prepare($sqlUser);
+        $stmtUser->bind_param("i", $id);
+
+        if ($stmtUser->execute()) {
+            header("Location: ../Pages/MangeAccount.php");
+        } else {
+            echo "Error deleting user: " . $conn->error;
+        }
+
+        $stmtUser->close();
     } else {
-        echo "Error deleting record: " . $conn->error;
+        echo "Error deleting related orders: " . $conn->error;
     }
 
-    $stmt->close();
+    $stmtOrders->close();
     $conn->close();
 } else {
     echo "No ID provided";
