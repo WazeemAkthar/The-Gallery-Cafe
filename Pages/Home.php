@@ -23,7 +23,7 @@ session_start();
       if (isset($_SESSION['name'])) {
         echo $_SESSION['name'];
       } else {
-        echo "Guest";
+        echo "";
       }
       ?>
       <h2>Discover Our Delicious Menu</h2>

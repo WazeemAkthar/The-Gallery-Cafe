@@ -96,7 +96,7 @@ main {
 }
 /* Hero Section */
 .hero {
-  background-image: url("../The Gallery Café Images/hero.jpg");
+  background-image: url("../The Gallery Café Images/heroimg.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
