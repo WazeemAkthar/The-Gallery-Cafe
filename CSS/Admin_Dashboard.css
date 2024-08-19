@@ -45,7 +45,6 @@ button:hover {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  height: 240px;
   align-content: space-between;
   justify-content: space-between;
 }
@@ -80,7 +79,11 @@ label {
 
 input[type="text"],
 input[type="number"],
-input[type="file"] {
+input[type="file"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="time"] {
   width: calc(100% - 20px);
   padding: 8px 10px;
   border: 1px solid #ccc;

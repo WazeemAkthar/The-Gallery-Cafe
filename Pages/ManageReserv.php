@@ -35,6 +35,50 @@ if ($conn->connect_error) {
     <link rel="stylesheet" href="../CSS/Admin_Dashboard.css">
 </head>
 
+<style>
+    /* Center the edit form */
+    #editForm {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        border-radius: 8px;
+    }
+
+    /* Full-screen overlay for background blur */
+    #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        /* Apply blur effect */
+        z-index: 999;
+    }
+
+
+    #overlay,
+    #editForm {
+        transition: opacity 0.3s ease;
+    }
+
+    textarea {
+        width: calc(100% - 20px);
+        padding: 8px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+</style>
+
 <body>
     <!-- <div id="adminNav"></div> -->
     <?php if ($_SESSION['role_id'] == $staffRoleId): ?>
@@ -57,8 +101,8 @@ if ($conn->connect_error) {
 
 
     <div class="container">
-    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>
-    (<?php echo htmlspecialchars($_SESSION['role_name']); ?>)</h1>
+        <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>
+            (<?php echo htmlspecialchars($_SESSION['role_name']); ?>)</h1>
         <div class="dashboard-container">
             <div class="dashboard-item">
                 <table id="reservations-table">
@@ -81,39 +125,47 @@ if ($conn->connect_error) {
         </div>
     </div>
 
-    <div id="editForm" style="display: none;">
+    <div id="overlay"></div>
+
+    <div class="form-container" id="editForm" style="display: none;">
         <h3>Edit Reservation</h3>
         <form id="reservationEditForm">
-            <input type="hidden" id="editId">
-            <div class="form-group">
-                <label for="editName">Name:</label>
-                <input type="text" id="editName" name="editName" required>
+            <div class="form-style">
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label for="editName">Name:</label>
+                    <input type="text" id="editName" name="editName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email:</label>
+                    <input type="email" id="editEmail" name="editEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="editPhone">Phone Number:</label>
+                    <input type="tel" id="editPhone" name="editPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="editDate">Date:</label>
+                    <input type="date" id="editDate" name="editDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="editTime">Time:</label>
+                    <input type="time" id="editTime" name="editTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="editGuests">Number of Guests:</label>
+                    <input type="number" id="editGuests" name="editGuests" min="1" max="8" required>
+                </div>
+                <div class="form-group">
+                    <label for="editMessage">Special Requests:</label>
+                    <textarea type="text" id="editMessage" name="editMessage" rows="2"></textarea>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="editEmail">Email:</label>
-                <input type="email" id="editEmail" name="editEmail" required>
+            <div class="button-contaiiner">
+                <button type="submit">Update Reservation</button>
+                <button type="cancel" onclick="closeEditForm()">Close</button>
             </div>
-            <div class="form-group">
-                <label for="editPhone">Phone Number:</label>
-                <input type="tel" id="editPhone" name="editPhone" required>
-            </div>
-            <div class="form-group">
-                <label for="editDate">Date:</label>
-                <input type="date" id="editDate" name="editDate" required>
-            </div>
-            <div class="form-group">
-                <label for="editTime">Time:</label>
-                <input type="time" id="editTime" name="editTime" required>
-            </div>
-            <div class="form-group">
-                <label for="editGuests">Number of Guests:</label>
-                <input type="number" id="editGuests" name="editGuests" min="1" max="8" required>
-            </div>
-            <div class="form-group">
-                <label for="editMessage">Special Requests:</label>
-                <textarea id="editMessage" name="editMessage" rows="4"></textarea>
-            </div>
-            <button type="submit">Update Reservation</button>
+
         </form>
     </div>
 
@@ -164,11 +216,28 @@ if ($conn->connect_error) {
             }
         }
 
+        // function editReservation(id) {
+        //     const reservation = document.querySelector(`#reservation-${id}`);
+        //     fetch(`../Backend/fetch_single_reservation.php?id=${id}`)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             document.querySelector('#editId').value = data.id;
+        //             document.querySelector('#editName').value = data.name;
+        //             document.querySelector('#editEmail').value = data.email;
+        //             document.querySelector('#editPhone').value = data.phone;
+        //             document.querySelector('#editDate').value = data.date;
+        //             document.querySelector('#editTime').value = data.time;
+        //             document.querySelector('#editGuests').value = data.guests;
+        //             document.querySelector('#editMessage').value = data.message;
+        //             document.querySelector('#editForm').style.display = 'block';
+        //         });
+        // }
+
         function editReservation(id) {
-            const reservation = document.querySelector(`#reservation-${id}`);
             fetch(`../Backend/fetch_single_reservation.php?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
+                    // Populate the form fields with reservation data
                     document.querySelector('#editId').value = data.id;
                     document.querySelector('#editName').value = data.name;
                     document.querySelector('#editEmail').value = data.email;
@@ -177,9 +246,22 @@ if ($conn->connect_error) {
                     document.querySelector('#editTime').value = data.time;
                     document.querySelector('#editGuests').value = data.guests;
                     document.querySelector('#editMessage').value = data.message;
+
+                    // Show the overlay and form
+                    document.querySelector('#overlay').style.display = 'block';
                     document.querySelector('#editForm').style.display = 'block';
                 });
         }
+
+        function closeEditForm() {
+            // Hide the overlay and form
+            document.querySelector('#overlay').style.display = 'none';
+            document.querySelector('#editForm').style.display = 'none';
+        }
+
+        // Hide the form and overlay when the user clicks outside the form
+        document.querySelector('#overlay').addEventListener('click', closeEditForm);
+
 
         document.querySelector('#reservationEditForm').addEventListener('submit', function (event) {
             event.preventDefault();
